@@ -1,0 +1,36 @@
+﻿namespace NetEvolve.Extensions.Data
+{
+    public static class IDataReaderExtensions
+    {
+        public static bool HasColumn(this System.Data.IDataReader reader, string name) { }
+    }
+    public static class IDataRecordExtensions
+    {
+        public static bool? GetNullableBoolean(this System.Data.IDataRecord record, int i, bool? defaultValue = default) { }
+        public static bool? GetNullableBoolean(this System.Data.IDataRecord record, string name, bool? defaultValue = default) { }
+        public static byte? GetNullableByte(this System.Data.IDataRecord record, int i, byte? defaultValue = default) { }
+        public static byte? GetNullableByte(this System.Data.IDataRecord record, string name, byte? defaultValue = default) { }
+        public static System.Char? GetNullableChar(this System.Data.IDataRecord record, int i, System.Char? defaultValue = default) { }
+        public static System.Char? GetNullableChar(this System.Data.IDataRecord record, string name, System.Char? defaultValue = default) { }
+        public static System.DateTime? GetNullableDateTime(this System.Data.IDataRecord record, int i, System.DateTime? defaultValue = default) { }
+        public static System.DateTime? GetNullableDateTime(this System.Data.IDataRecord record, string name, System.DateTime? defaultValue = default) { }
+        public static decimal? GetNullableDecimal(this System.Data.IDataRecord record, int i, decimal? defaultValue = default) { }
+        public static decimal? GetNullableDecimal(this System.Data.IDataRecord record, string name, decimal? defaultValue = default) { }
+        public static double? GetNullableDouble(this System.Data.IDataRecord record, int i, double? defaultValue = default) { }
+        public static double? GetNullableDouble(this System.Data.IDataRecord record, string name, double? defaultValue = default) { }
+        public static float? GetNullableFloat(this System.Data.IDataRecord record, int i, float? defaultValue = default) { }
+        public static float? GetNullableFloat(this System.Data.IDataRecord record, string name, float? defaultValue = default) { }
+        public static System.Guid? GetNullableGuid(this System.Data.IDataRecord record, int i, System.Guid? defaultValue = default) { }
+        public static System.Guid? GetNullableGuid(this System.Data.IDataRecord record, string name, System.Guid? defaultValue = default) { }
+        public static short? GetNullableInt16(this System.Data.IDataRecord record, int i, short? defaultValue = default) { }
+        public static short? GetNullableInt16(this System.Data.IDataRecord record, string name, short? defaultValue = default) { }
+        public static int? GetNullableInt32(this System.Data.IDataRecord record, int i, int? defaultValue = default) { }
+        public static int? GetNullableInt32(this System.Data.IDataRecord record, string name, int? defaultValue = default) { }
+        public static long? GetNullableInt64(this System.Data.IDataRecord record, int i, long? defaultValue = default) { }
+        public static long? GetNullableInt64(this System.Data.IDataRecord record, string name, long? defaultValue = default) { }
+        public static string? GetNullableString(this System.Data.IDataRecord record, int i, string? defaultValue = null) { }
+        public static string? GetNullableString(this System.Data.IDataRecord record, string name, string? defaultValue = null) { }
+        public static object? GetNullableValue(this System.Data.IDataRecord record, int i, object? defaultValue = null) { }
+        public static object? GetNullableValue(this System.Data.IDataRecord record, string name, object? defaultValue = null) { }
+    }
+}
