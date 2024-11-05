@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F13F80C7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetEvolve.Extensions.Data.Tests.Unit", "tests\NetEvolve.Extensions.Data.Tests.Unit\NetEvolve.Extensions.Data.Tests.Unit.csproj", "{C8A78C6C-514E-4FF5-ABAD-1DE2FF63D751}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetEvolve.Extensions.Data.Tests.PublicApi", "tests\NetEvolve.Extensions.Data.Tests.PublicApi\NetEvolve.Extensions.Data.Tests.PublicApi.csproj", "{7466A217-FD99-4C9B-8393-B3DCC4198539}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{C8A78C6C-514E-4FF5-ABAD-1DE2FF63D751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8A78C6C-514E-4FF5-ABAD-1DE2FF63D751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8A78C6C-514E-4FF5-ABAD-1DE2FF63D751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7466A217-FD99-4C9B-8393-B3DCC4198539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7466A217-FD99-4C9B-8393-B3DCC4198539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7466A217-FD99-4C9B-8393-B3DCC4198539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7466A217-FD99-4C9B-8393-B3DCC4198539}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,5 +58,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F04DA615-A3D2-4C39-A73A-86ED6F571AA7} = {65A2AFCB-601E-48B3-89B9-69AC19957F59}
 		{C8A78C6C-514E-4FF5-ABAD-1DE2FF63D751} = {F13F80C7-A67B-4680-BB2B-BE124C49DF56}
+		{7466A217-FD99-4C9B-8393-B3DCC4198539} = {F13F80C7-A67B-4680-BB2B-BE124C49DF56}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {575B3FE1-8503-45D4-B916-6C8D197C13D7}
 	EndGlobalSection
 EndGlobal
