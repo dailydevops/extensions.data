@@ -2,6 +2,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
@@ -30,6 +31,7 @@ public class PublicApiTests
                 typeof(AssemblyMetadataAttribute).FullName!,
                 typeof(NeutralResourcesLanguageAttribute).FullName!,
                 typeof(AttributeUsageAttribute).FullName!,
+                typeof(ExcludeFromCodeCoverageAttribute).FullName!,
             ],
             IncludeTypes = types,
         };
