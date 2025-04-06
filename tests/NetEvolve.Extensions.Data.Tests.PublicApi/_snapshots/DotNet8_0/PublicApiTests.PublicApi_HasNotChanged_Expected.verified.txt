@@ -10,8 +10,8 @@
         public static bool? GetNullableBoolean(this System.Data.IDataRecord record, string name, bool? defaultValue = default) { }
         public static byte? GetNullableByte(this System.Data.IDataRecord record, int i, byte? defaultValue = default) { }
         public static byte? GetNullableByte(this System.Data.IDataRecord record, string name, byte? defaultValue = default) { }
-        public static System.Char? GetNullableChar(this System.Data.IDataRecord record, int i, System.Char? defaultValue = default) { }
-        public static System.Char? GetNullableChar(this System.Data.IDataRecord record, string name, System.Char? defaultValue = default) { }
+        public static char? GetNullableChar(this System.Data.IDataRecord record, int i, char? defaultValue = default) { }
+        public static char? GetNullableChar(this System.Data.IDataRecord record, string name, char? defaultValue = default) { }
         public static System.DateTime? GetNullableDateTime(this System.Data.IDataRecord record, int i, System.DateTime? defaultValue = default) { }
         public static System.DateTime? GetNullableDateTime(this System.Data.IDataRecord record, string name, System.DateTime? defaultValue = default) { }
         public static decimal? GetNullableDecimal(this System.Data.IDataRecord record, int i, decimal? defaultValue = default) { }
