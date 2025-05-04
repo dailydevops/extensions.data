@@ -13,8 +13,7 @@ public class IDataRecordExtensionsTests
         var index = 0;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(
-            () => record.GetNullableBoolean(index)
+        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableBoolean(index)
         );
 
         // Assert
@@ -29,8 +28,8 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableBoolean(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
+            record.GetNullableBoolean(index)
         );
 
         // Assert
@@ -105,8 +104,8 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableBoolean(name)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
+            record.GetNullableBoolean(name)
         );
 
         // Assert
@@ -175,8 +174,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableByte(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableByte(index)
         );
 
         // Assert
@@ -315,8 +313,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableChar(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableChar(index)
         );
 
         // Assert
@@ -441,8 +438,7 @@ public class IDataRecordExtensionsTests
         var index = 0;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(
-            () => record.GetNullableDateTime(index)
+        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDateTime(index)
         );
 
         // Assert
@@ -457,8 +453,8 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableDateTime(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
+            record.GetNullableDateTime(index)
         );
 
         // Assert
@@ -491,8 +487,7 @@ public class IDataRecordExtensionsTests
         var name = "name";
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(
-            () => record.GetNullableDateTime(name)
+        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDateTime(name)
         );
 
         // Assert
@@ -507,8 +502,7 @@ public class IDataRecordExtensionsTests
         string name = null!;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(
-            () => record.GetNullableDateTime(name)
+        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDateTime(name)
         );
 
         // Assert
@@ -537,8 +531,8 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableDateTime(name)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
+            record.GetNullableDateTime(name)
         );
 
         // Assert
@@ -593,8 +587,7 @@ public class IDataRecordExtensionsTests
         var index = 0;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(
-            () => record.GetNullableDecimal(index)
+        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDecimal(index)
         );
 
         // Assert
@@ -609,8 +602,8 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableDecimal(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
+            record.GetNullableDecimal(index)
         );
 
         // Assert
@@ -685,8 +678,8 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableDecimal(name)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
+            record.GetNullableDecimal(name)
         );
 
         // Assert
@@ -755,8 +748,8 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableDouble(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
+            record.GetNullableDouble(index)
         );
 
         // Assert
@@ -831,8 +824,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableDouble(name)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableDouble(name)
         );
 
         // Assert
@@ -901,8 +893,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableFloat(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableFloat(index)
         );
 
         // Assert
@@ -977,8 +968,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableFloat(name)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableFloat(name)
         );
 
         // Assert
@@ -1047,8 +1037,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableGuid(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableGuid(index)
         );
 
         // Assert
@@ -1187,8 +1176,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableInt16(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt16(index)
         );
 
         // Assert
@@ -1263,8 +1251,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableInt16(name)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt16(name)
         );
 
         // Assert
@@ -1333,8 +1320,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableInt32(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt32(index)
         );
 
         // Assert
@@ -1405,8 +1391,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableInt32(name)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt32(name)
         );
 
         // Assert
@@ -1471,8 +1456,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableInt64(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt64(index)
         );
 
         // Assert
@@ -1543,8 +1527,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableInt64(name)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt64(name)
         );
 
         // Assert
@@ -1613,8 +1596,8 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableString(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
+            record.GetNullableString(index)
         );
 
         // Assert
@@ -1689,8 +1672,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableString(name)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableString(name)
         );
 
         // Assert
@@ -1759,8 +1741,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableValue(index)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableValue(index)
         );
 
         // Assert
@@ -1835,8 +1816,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(
-            () => record.GetNullableValue(name)
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableValue(name)
         );
 
         // Assert

@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup Label="Package settings">
     <Title>$(MSBuildProjectName)</Title>
     <Description>Extensions for the `System.Data` namespace</Description>
@@ -9,17 +8,13 @@
     <PackageTags>Data;IDataReader;IDataRecord;extensions</PackageTags>
     <CopyrightYearStart>2024</CopyrightYearStart>
   </PropertyGroup>
-
   <PropertyGroup>
     <NetEvolve_ProjectTargetFrameworks>netstandard2.0;net8.0;net9.0</NetEvolve_ProjectTargetFrameworks>
     <NetEvolve_TestTargetFrameworks>net6.0;net8.0;net9.0</NetEvolve_TestTargetFrameworks>
-
     <NoWarn Condition=" '$(TargetFramework)' == 'netstandard2.0' ">$(NoWarn);CA1062;</NoWarn>
   </PropertyGroup>
-
   <PropertyGroup>
     <!-- Workaround, until https://github.com/GitTools/GitVersion/pull/4206 is released -->
     <GitVersionTargetFramework>net8.0</GitVersionTargetFramework>
   </PropertyGroup>
-
 </Project>
