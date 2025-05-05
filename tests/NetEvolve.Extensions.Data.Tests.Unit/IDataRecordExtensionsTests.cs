@@ -13,8 +13,7 @@ public class IDataRecordExtensionsTests
         var index = 0;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableBoolean(index)
-        );
+        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableBoolean(index));
 
         // Assert
         Assert.Equal("record", exception.ParamName);
@@ -28,9 +27,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
-            record.GetNullableBoolean(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableBoolean(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -38,11 +35,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableBooleanIndexData))]
-    public void GetNullableBooleanIndex_Theory_Expected(
-        bool? expected,
-        int index,
-        bool? defaultValue
-    )
+    public void GetNullableBooleanIndex_Theory_Expected(bool? expected, int index, bool? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -104,9 +97,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
-            record.GetNullableBoolean(name)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableBoolean(name));
 
         // Assert
         Assert.NotNull(exception);
@@ -114,11 +105,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableBooleanNamedData))]
-    public void GetNullableBooleanNamed_Theory_Expected(
-        bool? expected,
-        string name,
-        bool? defaultValue
-    )
+    public void GetNullableBooleanNamed_Theory_Expected(bool? expected, string name, bool? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -174,8 +161,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableByte(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableByte(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -253,11 +239,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableByteNamedData))]
-    public void GetNullableByteNamed_Theory_Expected(
-        byte? expected,
-        string name,
-        byte? defaultValue
-    )
+    public void GetNullableByteNamed_Theory_Expected(byte? expected, string name, byte? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -313,8 +295,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableChar(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableChar(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -392,11 +373,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableCharNamedData))]
-    public void GetNullableCharNamed_Theory_Expected(
-        char? expected,
-        string name,
-        char? defaultValue
-    )
+    public void GetNullableCharNamed_Theory_Expected(char? expected, string name, char? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -438,8 +415,7 @@ public class IDataRecordExtensionsTests
         var index = 0;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDateTime(index)
-        );
+        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDateTime(index));
 
         // Assert
         Assert.Equal("record", exception.ParamName);
@@ -453,9 +429,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
-            record.GetNullableDateTime(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableDateTime(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -463,11 +437,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableDateTimeIndexData))]
-    public void GetNullableDateTimeIndex_Theory_Expected(
-        DateTime? expected,
-        int index,
-        DateTime? defaultValue
-    )
+    public void GetNullableDateTimeIndex_Theory_Expected(DateTime? expected, int index, DateTime? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -487,8 +457,7 @@ public class IDataRecordExtensionsTests
         var name = "name";
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDateTime(name)
-        );
+        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDateTime(name));
 
         // Assert
         Assert.Equal("record", exception.ParamName);
@@ -502,8 +471,7 @@ public class IDataRecordExtensionsTests
         string name = null!;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDateTime(name)
-        );
+        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDateTime(name));
 
         // Assert
         Assert.Equal("name", exception.ParamName);
@@ -531,9 +499,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
-            record.GetNullableDateTime(name)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableDateTime(name));
 
         // Assert
         Assert.NotNull(exception);
@@ -541,11 +507,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableDateTimeNamedData))]
-    public void GetNullableDateTimeNamed_Theory_Expected(
-        DateTime? expected,
-        string name,
-        DateTime? defaultValue
-    )
+    public void GetNullableDateTimeNamed_Theory_Expected(DateTime? expected, string name, DateTime? defaultValue)
     // Arrange
     {
         var record = CreateTestRecord();
@@ -587,8 +549,7 @@ public class IDataRecordExtensionsTests
         var index = 0;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDecimal(index)
-        );
+        var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableDecimal(index));
 
         // Assert
         Assert.Equal("record", exception.ParamName);
@@ -602,9 +563,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
-            record.GetNullableDecimal(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableDecimal(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -612,11 +571,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableDecimalIndexData))]
-    public void GetNullableDecimalIndex_Theory_Expected(
-        decimal? expected,
-        int index,
-        decimal? defaultValue
-    )
+    public void GetNullableDecimalIndex_Theory_Expected(decimal? expected, int index, decimal? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -678,9 +633,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
-            record.GetNullableDecimal(name)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableDecimal(name));
 
         // Assert
         Assert.NotNull(exception);
@@ -688,11 +641,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableDecimalNamedData))]
-    public void GetNullableDecimalNamed_Theory_Expected(
-        decimal? expected,
-        string name,
-        decimal? defaultValue
-    )
+    public void GetNullableDecimalNamed_Theory_Expected(decimal? expected, string name, decimal? defaultValue)
     // Arrange
     {
         var record = CreateTestRecord();
@@ -748,9 +697,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
-            record.GetNullableDouble(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableDouble(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -758,11 +705,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableDoubleIndexData))]
-    public void GetNullableDoubleIndex_Theory_Expected(
-        double? expected,
-        int index,
-        double? defaultValue
-    )
+    public void GetNullableDoubleIndex_Theory_Expected(double? expected, int index, double? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -824,8 +767,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableDouble(name)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableDouble(name));
 
         // Assert
         Assert.NotNull(exception);
@@ -833,11 +775,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableDoubleNamedData))]
-    public void GetNullableDoubleNamed_Theory_Expected(
-        double? expected,
-        string name,
-        double? defaultValue
-    )
+    public void GetNullableDoubleNamed_Theory_Expected(double? expected, string name, double? defaultValue)
     // Arrange
     {
         var record = CreateTestRecord();
@@ -893,8 +831,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableFloat(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableFloat(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -902,11 +839,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableFloatIndexData))]
-    public void GetNullableFloatIndex_Theory_Expected(
-        float? expected,
-        int index,
-        float? defaultValue
-    )
+    public void GetNullableFloatIndex_Theory_Expected(float? expected, int index, float? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -968,8 +901,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableFloat(name)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableFloat(name));
 
         // Assert
         Assert.NotNull(exception);
@@ -977,11 +909,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableFloatNamedData))]
-    public void GetNullableFloatNamed_Theory_Expected(
-        float? expected,
-        string name,
-        float? defaultValue
-    )
+    public void GetNullableFloatNamed_Theory_Expected(float? expected, string name, float? defaultValue)
     // Arrange
     {
         var record = CreateTestRecord();
@@ -1037,8 +965,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableGuid(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableGuid(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -1116,11 +1043,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableGuidNamedData))]
-    public void GetNullableGuidNamed_Theory_Expected(
-        Guid? expected,
-        string name,
-        Guid? defaultValue
-    )
+    public void GetNullableGuidNamed_Theory_Expected(Guid? expected, string name, Guid? defaultValue)
     // Arrange
     {
         var record = CreateTestRecord();
@@ -1176,8 +1099,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt16(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt16(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -1185,11 +1107,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableInt16IndexData))]
-    public void GetNullableInt16Index_Theory_Expected(
-        short? expected,
-        int index,
-        short? defaultValue
-    )
+    public void GetNullableInt16Index_Theory_Expected(short? expected, int index, short? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -1251,8 +1169,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt16(name)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt16(name));
 
         // Assert
         Assert.NotNull(exception);
@@ -1260,11 +1177,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableInt16NamedData))]
-    public void GetNullableInt16Named_Theory_Expected(
-        short? expected,
-        string name,
-        short? defaultValue
-    )
+    public void GetNullableInt16Named_Theory_Expected(short? expected, string name, short? defaultValue)
     // Arrange
     {
         var record = CreateTestRecord();
@@ -1320,8 +1233,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt32(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt32(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -1391,8 +1303,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt32(name)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt32(name));
 
         // Assert
         Assert.NotNull(exception);
@@ -1456,8 +1367,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt64(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt64(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -1527,8 +1437,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt64(name)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableInt64(name));
 
         // Assert
         Assert.NotNull(exception);
@@ -1536,11 +1445,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableInt64NamedData))]
-    public void GetNullableInt64Named_Theory_Expected(
-        long? expected,
-        string name,
-        long? defaultValue
-    )
+    public void GetNullableInt64Named_Theory_Expected(long? expected, string name, long? defaultValue)
     // Arrange
     {
         var record = CreateTestRecord();
@@ -1596,9 +1501,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() =>
-            record.GetNullableString(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableString(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -1606,11 +1509,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableStringIndexData))]
-    public void GetNullableStringIndex_Theory_Expected(
-        string? expected,
-        int index,
-        string? defaultValue
-    )
+    public void GetNullableStringIndex_Theory_Expected(string? expected, int index, string? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -1672,8 +1571,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableString(name)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableString(name));
 
         // Assert
         Assert.NotNull(exception);
@@ -1681,11 +1579,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableStringNamedData))]
-    public void GetNullableStringNamed_Theory_Expected(
-        string? expected,
-        string name,
-        string? defaultValue
-    )
+    public void GetNullableStringNamed_Theory_Expected(string? expected, string name, string? defaultValue)
     // Arrange
     {
         var record = CreateTestRecord();
@@ -1741,8 +1635,7 @@ public class IDataRecordExtensionsTests
         var index = -1;
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableValue(index)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableValue(index));
 
         // Assert
         Assert.NotNull(exception);
@@ -1750,11 +1643,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableValueIndexData))]
-    public void GetNullableValueIndex_Theory_Expected(
-        object? expected,
-        int index,
-        object? defaultValue
-    )
+    public void GetNullableValueIndex_Theory_Expected(object? expected, int index, object? defaultValue)
     {
         // Arrange
         var record = CreateTestRecord();
@@ -1816,8 +1705,7 @@ public class IDataRecordExtensionsTests
         var name = "Mail";
 
         // Act
-        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableValue(name)
-        );
+        var exception = Assert.Throws<IndexOutOfRangeException>(() => record.GetNullableValue(name));
 
         // Assert
         Assert.NotNull(exception);
@@ -1825,11 +1713,7 @@ public class IDataRecordExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetNullableValueNamedData))]
-    public void GetNullableValueNamed_Theory_Expected(
-        object? expected,
-        string name,
-        object? defaultValue
-    )
+    public void GetNullableValueNamed_Theory_Expected(object? expected, string name, object? defaultValue)
     // Arrange
     {
         var record = CreateTestRecord();

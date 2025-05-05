@@ -18,11 +18,7 @@ public static class IDataRecordExtensions
     /// <returns>The value of the specified column.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="record"/> is <see langword="null"/>.</exception>
     /// <exception cref="IndexOutOfRangeException">The index passed was outside the range of 0 through <see cref="IDataRecord.FieldCount"/>.</exception>
-    public static bool? GetNullableBoolean(
-        this IDataRecord record,
-        int i,
-        bool? defaultValue = null
-    )
+    public static bool? GetNullableBoolean(this IDataRecord record, int i, bool? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
 
@@ -40,11 +36,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static bool? GetNullableBoolean(
-        this IDataRecord record,
-        string name,
-        bool? defaultValue = null
-    )
+    public static bool? GetNullableBoolean(this IDataRecord record, string name, bool? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -80,11 +72,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static byte? GetNullableByte(
-        this IDataRecord record,
-        string name,
-        byte? defaultValue = null
-    )
+    public static byte? GetNullableByte(this IDataRecord record, string name, byte? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -120,11 +108,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static char? GetNullableChar(
-        this IDataRecord record,
-        string name,
-        char? defaultValue = null
-    )
+    public static char? GetNullableChar(this IDataRecord record, string name, char? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -142,11 +126,7 @@ public static class IDataRecordExtensions
     /// <returns>The value of the specified column.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="record"/> is <see langword="null"/>.</exception>
     /// <exception cref="IndexOutOfRangeException">The index passed was outside the range of 0 through <see cref="IDataRecord.FieldCount"/>.</exception>
-    public static DateTime? GetNullableDateTime(
-        this IDataRecord record,
-        int i,
-        DateTime? defaultValue = null
-    )
+    public static DateTime? GetNullableDateTime(this IDataRecord record, int i, DateTime? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
 
@@ -164,11 +144,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static DateTime? GetNullableDateTime(
-        this IDataRecord record,
-        string name,
-        DateTime? defaultValue = null
-    )
+    public static DateTime? GetNullableDateTime(this IDataRecord record, string name, DateTime? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -186,11 +162,7 @@ public static class IDataRecordExtensions
     /// <returns>The value of the specified column.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="record"/> is <see langword="null"/>.</exception>
     /// <exception cref="IndexOutOfRangeException">The index passed was outside the range of 0 through <see cref="IDataRecord.FieldCount"/>.</exception>
-    public static decimal? GetNullableDecimal(
-        this IDataRecord record,
-        int i,
-        decimal? defaultValue = null
-    )
+    public static decimal? GetNullableDecimal(this IDataRecord record, int i, decimal? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
 
@@ -208,11 +180,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static decimal? GetNullableDecimal(
-        this IDataRecord record,
-        string name,
-        decimal? defaultValue = null
-    )
+    public static decimal? GetNullableDecimal(this IDataRecord record, string name, decimal? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -230,11 +198,7 @@ public static class IDataRecordExtensions
     /// <returns>The value of the specified column.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="record"/> is <see langword="null"/>.</exception>
     /// <exception cref="IndexOutOfRangeException">The index passed was outside the range of 0 through <see cref="IDataRecord.FieldCount"/>.</exception>
-    public static double? GetNullableDouble(
-        this IDataRecord record,
-        int i,
-        double? defaultValue = null
-    )
+    public static double? GetNullableDouble(this IDataRecord record, int i, double? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
 
@@ -252,11 +216,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static double? GetNullableDouble(
-        this IDataRecord record,
-        string name,
-        double? defaultValue = null
-    )
+    public static double? GetNullableDouble(this IDataRecord record, string name, double? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -274,11 +234,7 @@ public static class IDataRecordExtensions
     /// <returns>The value of the specified column.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="record"/> is <see langword="null"/>.</exception>
     /// <exception cref="IndexOutOfRangeException">The index passed was outside the range of 0 through <see cref="IDataRecord.FieldCount"/>.</exception>
-    public static float? GetNullableFloat(
-        this IDataRecord record,
-        int i,
-        float? defaultValue = null
-    )
+    public static float? GetNullableFloat(this IDataRecord record, int i, float? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
 
@@ -296,11 +252,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static float? GetNullableFloat(
-        this IDataRecord record,
-        string name,
-        float? defaultValue = null
-    )
+    public static float? GetNullableFloat(this IDataRecord record, string name, float? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -336,11 +288,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static Guid? GetNullableGuid(
-        this IDataRecord record,
-        string name,
-        Guid? defaultValue = null
-    )
+    public static Guid? GetNullableGuid(this IDataRecord record, string name, Guid? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -358,11 +306,7 @@ public static class IDataRecordExtensions
     /// <returns>The value of the specified column.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="record"/> is <see langword="null"/>.</exception>
     /// <exception cref="IndexOutOfRangeException">The index passed was outside the range of 0 through <see cref="IDataRecord.FieldCount"/>.</exception>
-    public static short? GetNullableInt16(
-        this IDataRecord record,
-        int i,
-        short? defaultValue = null
-    )
+    public static short? GetNullableInt16(this IDataRecord record, int i, short? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
 
@@ -380,11 +324,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static short? GetNullableInt16(
-        this IDataRecord record,
-        string name,
-        short? defaultValue = null
-    )
+    public static short? GetNullableInt16(this IDataRecord record, string name, short? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -420,11 +360,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static int? GetNullableInt32(
-        this IDataRecord record,
-        string name,
-        int? defaultValue = null
-    )
+    public static int? GetNullableInt32(this IDataRecord record, string name, int? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -460,11 +396,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static long? GetNullableInt64(
-        this IDataRecord record,
-        string name,
-        long? defaultValue = null
-    )
+    public static long? GetNullableInt64(this IDataRecord record, string name, long? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -482,11 +414,7 @@ public static class IDataRecordExtensions
     /// <returns>The value of the specified column.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="record"/> is <see langword="null"/>.</exception>
     /// <exception cref="IndexOutOfRangeException">The index passed was outside the range of 0 through <see cref="IDataRecord.FieldCount"/>.</exception>
-    public static string? GetNullableString(
-        this IDataRecord record,
-        int i,
-        string? defaultValue = null
-    )
+    public static string? GetNullableString(this IDataRecord record, int i, string? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
 
@@ -504,11 +432,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static string? GetNullableString(
-        this IDataRecord record,
-        string name,
-        string? defaultValue = null
-    )
+    public static string? GetNullableString(this IDataRecord record, string name, string? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
@@ -526,11 +450,7 @@ public static class IDataRecordExtensions
     /// <returns>The value of the specified column.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="record"/> is <see langword="null"/>.</exception>
     /// <exception cref="IndexOutOfRangeException">The index passed was outside the range of 0 through <see cref="IDataRecord.FieldCount"/>.</exception>
-    public static object? GetNullableValue(
-        this IDataRecord record,
-        int i,
-        object? defaultValue = null
-    )
+    public static object? GetNullableValue(this IDataRecord record, int i, object? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
 
@@ -548,11 +468,7 @@ public static class IDataRecordExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is empty or whitespace.</exception>
     /// <exception cref="IndexOutOfRangeException">The column name passed was not found.</exception>
-    public static object? GetNullableValue(
-        this IDataRecord record,
-        string name,
-        object? defaultValue = null
-    )
+    public static object? GetNullableValue(this IDataRecord record, string name, object? defaultValue = null)
     {
         Argument.ThrowIfNull(record);
         Argument.ThrowIfNullOrWhiteSpace(name);
