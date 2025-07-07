@@ -4,16 +4,16 @@ using System.Data;
 using NetEvolve.Arguments;
 
 /// <summary>
-/// Provides a set of extension methods for <see cref="IDataReader"/>.
+/// Provides extension methods for <see cref="IDataReader"/> to enhance data reader operations.
 /// </summary>
 public static class IDataReaderExtensions
 {
     /// <summary>
-    /// Determines whether the <see cref="IDataReader"/> contains a column with the specified name.
+    /// Determines whether the data reader contains a column with the specified name.
     /// </summary>
-    /// <param name="reader">The <see cref="IDataReader"/> to check.</param>
-    /// <param name="name">The name of the column to find.</param>
-    /// <returns><see langword="true"/> if the <see cref="IDataReader"/> contains a column with the specified name; otherwise, <see langword="false"/>.</returns>
+    /// <param name="reader">The data reader to search for the column.</param>
+    /// <param name="name">The name of the column to locate.</param>
+    /// <returns><see langword="true"/> if the column exists; otherwise, <see langword="false"/>.</returns>
     public static bool HasColumn(this IDataReader reader, string name)
     {
         Argument.ThrowIfNull(reader);
