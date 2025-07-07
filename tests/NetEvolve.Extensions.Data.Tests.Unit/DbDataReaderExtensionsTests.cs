@@ -6,8 +6,6 @@ using NSubstitute;
 
 public class DbDataReaderExtensionsTests
 {
-    #region GetFieldValue<T>(string name) Tests
-
     [Fact]
     public void GetFieldValue_String_WhenReaderIsNull_ThrowsArgumentNullException()
     {
@@ -93,10 +91,6 @@ public class DbDataReaderExtensionsTests
                 DateTime.Parse("2023-01-01", CultureInfo.InvariantCulture)
             },
         };
-
-    #endregion
-
-    #region GetFieldValueAsync<T>(string name, CancellationToken) Tests
 
     [Fact]
     public async Task GetFieldValueAsync_String_WhenReaderIsNull_ThrowsArgumentNullException()
@@ -202,10 +196,6 @@ public class DbDataReaderExtensionsTests
             },
         };
 
-    #endregion
-
-    #region GetFieldValueOrDefault<T>(int i) Tests
-
     [Fact]
     public void GetFieldValueOrDefault_Int_WhenReaderIsNull_ThrowsArgumentNullException()
     {
@@ -276,10 +266,6 @@ public class DbDataReaderExtensionsTests
                 DateTime.Parse("2023-01-01", CultureInfo.InvariantCulture)
             },
         };
-
-    #endregion
-
-    #region GetFieldValueOrDefault<T>(string name) Tests
 
     [Fact]
     public void GetFieldValueOrDefault_String_WhenReaderIsNull_ThrowsArgumentNullException()
@@ -389,10 +375,6 @@ public class DbDataReaderExtensionsTests
             { true, "boolColumn", false, true },
         };
 
-    #endregion
-
-    #region GetFieldValueOrDefaultAsync<T>(int i, CancellationToken) Tests
-
     [Fact]
     public async Task GetFieldValueOrDefaultAsync_Int_WhenReaderIsNull_ThrowsArgumentNullException()
     {
@@ -480,10 +462,6 @@ public class DbDataReaderExtensionsTests
                 DateTime.Parse("2023-01-01", CultureInfo.InvariantCulture)
             },
         };
-
-    #endregion
-
-    #region GetFieldValueOrDefaultAsync<T>(string name, CancellationToken) Tests
 
     [Fact]
     public async Task GetFieldValueOrDefaultAsync_String_WhenReaderIsNull_ThrowsArgumentNullException()
@@ -617,6 +595,4 @@ public class DbDataReaderExtensionsTests
             { false, "boolColumn", true, true },
             { true, "boolColumn", false, true },
         };
-
-    #endregion
 }
