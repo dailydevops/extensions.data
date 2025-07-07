@@ -101,8 +101,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         _ = command.ExecuteNonQuery();
     }
 
-    #region GetNullableBoolean Tests
-
     [Fact]
     public void GetNullableBoolean_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
@@ -168,10 +166,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         Assert.False(result);
     }
 
-    #endregion
-
-    #region GetNullableByte Tests
-
     [Fact]
     public void GetNullableByte_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
@@ -198,10 +192,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         Assert.Equal((byte)100, result);
     }
 
-    #endregion
-
-    #region GetNullableChar Tests
-
     [Fact]
     public void GetNullableChar_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
@@ -227,10 +217,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
 
         Assert.Equal('X', result);
     }
-
-    #endregion
-
-    #region GetNullableDateTime Tests
 
     [Fact]
     public void GetNullableDateTime_ByIndex_WithValidValue_ReturnsCorrectValue()
@@ -259,10 +245,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         Assert.Equal(defaultDate, result);
     }
 
-    #endregion
-
-    #region GetNullableDecimal Tests
-
     [Fact]
     public void GetNullableDecimal_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
@@ -288,10 +270,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
 
         Assert.Equal(999.99m, result);
     }
-
-    #endregion
-
-    #region GetNullableDouble Tests
 
     [Fact]
     public void GetNullableDouble_ByIndex_WithValidValue_ReturnsCorrectValue()
@@ -321,10 +299,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         Assert.True(Math.Abs(result.Value - 888.888) < 0.001);
     }
 
-    #endregion
-
-    #region GetNullableFloat Tests
-
     [Fact]
     public void GetNullableFloat_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
@@ -353,10 +327,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         Assert.True(Math.Abs(result.Value - 777.7f) < 0.1f);
     }
 
-    #endregion
-
-    #region GetNullableGuid Tests
-
     [Fact]
     public void GetNullableGuid_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
@@ -383,10 +353,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
 
         Assert.Equal(defaultGuid, result);
     }
-
-    #endregion
-
-    #region GetNullableInt16 Tests
 
     [Fact]
     public void GetNullableInt16_ByIndex_WithValidValue_ReturnsCorrectValue()
@@ -427,10 +393,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         Assert.Equal((short)-32768, result);
     }
 
-    #endregion
-
-    #region GetNullableInt32 Tests
-
     [Fact]
     public void GetNullableInt32_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
@@ -469,10 +431,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
 
         Assert.Equal(-2147483648, result);
     }
-
-    #endregion
-
-    #region GetNullableInt64 Tests
 
     [Fact]
     public void GetNullableInt64_ByIndex_WithValidValue_ReturnsCorrectValue()
@@ -513,10 +471,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         Assert.Equal(-9223372036854775808L, result);
     }
 
-    #endregion
-
-    #region GetNullableString Tests
-
     [Fact]
     public void GetNullableString_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
@@ -556,10 +510,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         Assert.Equal("Another String", result);
     }
 
-    #endregion
-
-    #region GetNullableValue Tests
-
     [Fact]
     public void GetNullableValue_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
@@ -598,10 +548,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
 
         Assert.Equal(30L, result); // SQLite returns INTEGER as long
     }
-
-    #endregion
-
-    #region Error Handling Tests
 
     [Fact]
     public void GetNullableBoolean_WithNullRecord_ThrowsArgumentNullException()
@@ -664,10 +610,6 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
 
         _ = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetNullableBoolean("NonExistentColumn"));
     }
-
-    #endregion
-
-    #region Multiple Column Tests
 
     [Fact]
     public void GetNullableValues_MultipleColumns_ReturnsCorrectValues()
@@ -759,6 +701,4 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         Assert.Equal(789L, int64Value);
         Assert.Equal("Default", stringValue);
     }
-
-    #endregion
 }
