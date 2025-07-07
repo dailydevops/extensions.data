@@ -1,5 +1,14 @@
 ﻿namespace NetEvolve.Extensions.Data
 {
+    public static class DbDataReaderExtensions
+    {
+        public static T GetFieldValue<T>(this System.Data.Common.DbDataReader reader, string name) { }
+        public static System.Threading.Tasks.Task<T> GetFieldValueAsync<T>(this System.Data.Common.DbDataReader reader, string name, System.Threading.CancellationToken cancellationToken = default) { }
+        public static T GetFieldValueOrDefault<T>(this System.Data.Common.DbDataReader reader, int ordinal, T defaultValue = default) { }
+        public static T GetFieldValueOrDefault<T>(this System.Data.Common.DbDataReader reader, string name, T defaultValue = default) { }
+        public static System.Threading.Tasks.Task<T> GetFieldValueOrDefaultAsync<T>(this System.Data.Common.DbDataReader reader, int ordinal, T defaultValue = default, System.Threading.CancellationToken cancellationToken = default) { }
+        public static System.Threading.Tasks.Task<T> GetFieldValueOrDefaultAsync<T>(this System.Data.Common.DbDataReader reader, string name, T defaultValue = default, System.Threading.CancellationToken cancellationToken = default) { }
+    }
     public static class IDataReaderExtensions
     {
         public static bool HasColumn(this System.Data.IDataReader reader, string name) { }
