@@ -54,7 +54,10 @@ dotnet add package NetEvolve.Extensions.Data
 ## 📖 Usage
 
 All extension methods are available in the `NetEvolve.Extensions.Data` namespace.
+```csharp
 using NetEvolve.Extensions.Data;
+```
+
 ### IDataReader Extensions
 
 #### Check if Column Existsusing var command = connection.CreateCommand();
