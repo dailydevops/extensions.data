@@ -60,7 +60,9 @@ using NetEvolve.Extensions.Data;
 
 ### IDataReader Extensions
 
-#### Check if Column Existsusing var command = connection.CreateCommand();
+#### Check if Column Exists
+```csharp
+using var command = connection.CreateCommand();
 command.CommandText = "SELECT Id, Name, Email FROM Users";
 using var reader = command.ExecuteReader();
 
@@ -75,9 +77,13 @@ while (reader.Read())
     // Avoid runtime exceptions for optional columns
     var phoneExists = reader.HasColumn("Phone"); // Returns false if column doesn't exist
 }
+```
+
 ### IDataRecord Extensions
 
-#### Null-Safe Value Retrievalusing var command = connection.CreateCommand();
+#### Null-Safe Value Retrieval
+```csharp
+using var command = connection.CreateCommand();
 command.CommandText = "SELECT Id, Name, Age, IsActive, Salary, CreatedDate FROM Users";
 using var reader = command.ExecuteReader();
 
@@ -97,7 +103,10 @@ while (reader.Read())
     // Using column index instead of name
     var emailByIndex = reader.GetNullableString(3, "no-email@example.com");
 }
-#### Working with All Supported Types// Nullable primitive types with default values
+```
+#### Working with All Supported Types
+```csharp
+// Nullable primitive types with default values
 var nullableBool = record.GetNullableBoolean("IsActive", false);
 var nullableByte = record.GetNullableByte("StatusCode", 0);
 var nullableChar = record.GetNullableChar("Grade", 'N');
@@ -111,9 +120,12 @@ var nullableInt32 = record.GetNullableInt32("Count", 0);
 var nullableInt64 = record.GetNullableInt64("BigNumber", 0L);
 var nullableString = record.GetNullableString("Description", "N/A");
 var nullableValue = record.GetNullableValue("CustomColumn");
+```
 ### DbDataReader Extensions
 
-#### Generic Type-Safe Accessusing var command = connection.CreateCommand();
+#### Generic Type-Safe Access
+```csharp
+using var command = connection.CreateCommand();
 command.CommandText = "SELECT Id, Name, CreatedDate, IsActive FROM Users";
 using var reader = command.ExecuteReader();
 
@@ -132,7 +144,10 @@ while (reader.Read())
     // Using column ordinal
     var idByOrdinal = reader.GetFieldValueOrDefault<int>(0, -1);
 }
-#### Async Operationsusing var command = connection.CreateCommand();
+```
+#### Async Operations
+```csharp
+using var command = connection.CreateCommand();
 command.CommandText = "SELECT Id, Name, Data FROM LargeTable";
 using var reader = await command.ExecuteReaderAsync();
 
@@ -149,7 +164,9 @@ while (await reader.ReadAsync())
     using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
     var largeField = await reader.GetFieldValueOrDefaultAsync<string>("LargeTextField", "", cts.Token);
 }
+```
 ## 🏗️ Real-World Example
+```csharp
 public class UserService
 {
     private readonly IDbConnection _connection;
@@ -216,6 +233,7 @@ public class User
     public DateTime? LastLoginDate { get; set; }
     public byte[]? ProfileImage { get; set; }
 }
+```
 ## 📚 API Reference
 
 ### IDataReaderExtensions
