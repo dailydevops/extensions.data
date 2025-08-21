@@ -1,0 +1,34 @@
+name: NuGet Package
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  nuget:
+    name: Publish
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }}
+
+    environment: NuGet
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+        with:
+          fetch-depth: 0
+
+      - name: Download artifacts from `CI` workflow
+        uses: actions/download-artifact@v5.0.0
+        with:
+          name: release-packages-${{ hashFiles('./Extensions.Data.slnx') }}
+          path: packages
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Publish NuGet Package
+        run: |
+          dotnet nuget push packages/**/*.nupkg -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json --skip-duplicate
