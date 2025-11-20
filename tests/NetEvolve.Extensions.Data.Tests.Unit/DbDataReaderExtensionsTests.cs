@@ -11,7 +11,7 @@ using NSubstitute;
 public class DbDataReaderExtensionsTests
 {
     [Test]
-    public async Task GetFieldValue_String_WhenReaderIsNull_ThrowsArgumentNullException()
+    public void GetFieldValue_String_WhenReaderIsNull_ThrowsArgumentNullException()
     {
         DbDataReader reader = null!;
         var name = "column";
@@ -20,7 +20,7 @@ public class DbDataReaderExtensionsTests
     }
 
     [Test]
-    public async Task GetFieldValue_String_WhenNameIsNull_ThrowsArgumentNullException()
+    public void GetFieldValue_String_WhenNameIsNull_ThrowsArgumentNullException()
     {
         var reader = Substitute.For<DbDataReader>();
         string name = null!;
@@ -29,7 +29,7 @@ public class DbDataReaderExtensionsTests
     }
 
     [Test]
-    public async Task GetFieldValue_String_WhenNameIsEmpty_ThrowsArgumentException()
+    public void GetFieldValue_String_WhenNameIsEmpty_ThrowsArgumentException()
     {
         var reader = Substitute.For<DbDataReader>();
         var name = string.Empty;
@@ -38,7 +38,7 @@ public class DbDataReaderExtensionsTests
     }
 
     [Test]
-    public async Task GetFieldValue_String_WhenNameIsWhiteSpace_ThrowsArgumentException()
+    public void GetFieldValue_String_WhenNameIsWhiteSpace_ThrowsArgumentException()
     {
         var reader = Substitute.For<DbDataReader>();
         var name = "   ";
@@ -183,7 +183,7 @@ public class DbDataReaderExtensionsTests
         ];
 
     [Test]
-    public async Task GetFieldValueOrDefault_Int_WhenReaderIsNull_ThrowsArgumentNullException()
+    public void GetFieldValueOrDefault_Int_WhenReaderIsNull_ThrowsArgumentNullException()
     {
         DbDataReader reader = null!;
         var index = 0;
