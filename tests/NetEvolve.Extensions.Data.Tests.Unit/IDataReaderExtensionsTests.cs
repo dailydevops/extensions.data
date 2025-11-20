@@ -35,7 +35,7 @@ public class IDataReaderExtensionsTests
         var name = string.Empty;
 
         // Act
-        var exception = Assert.Throws<ArgumentException>("name", () => reader.HasColumn(name));
+        _ = Assert.Throws<ArgumentException>("name", () => reader.HasColumn(name));
     }
 
     [Test]
