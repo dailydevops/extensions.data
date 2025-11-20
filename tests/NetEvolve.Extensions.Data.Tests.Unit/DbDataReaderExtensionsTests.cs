@@ -63,14 +63,14 @@ public class DbDataReaderExtensionsTests
 
     [Test]
     [MethodDataSource(nameof(GetFieldValueStringData))]
-    public async Task GetFieldValue_String_Theory_Expected<T>(T expected, string columnName, T fieldValue)
+    public async Task GetFieldValue_String_Theory_Expected(object? expected, string columnName, object? fieldValue)
     {
         var reader = Substitute.For<DbDataReader>();
         var ordinal = 0;
         _ = reader.GetOrdinal(columnName).Returns(ordinal);
-        _ = reader.GetFieldValue<T>(ordinal).Returns(fieldValue);
+        _ = reader.GetFieldValue<object>(ordinal).Returns(fieldValue);
 
-        var result = reader.GetFieldValue<T>(columnName);
+        var result = reader.GetFieldValue<object>(columnName);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
@@ -158,14 +158,16 @@ public class DbDataReaderExtensionsTests
 
     [Test]
     [MethodDataSource(nameof(GetFieldValueAsyncStringData))]
-    public async Task GetFieldValueAsync_String_Theory_Expected<T>(T expected, string columnName, T fieldValue)
+    public async Task GetFieldValueAsync_String_Theory_Expected(object? expected, string columnName, object? fieldValue)
     {
         var reader = Substitute.For<DbDataReader>();
         var ordinal = 0;
         _ = reader.GetOrdinal(columnName).Returns(ordinal);
-        _ = reader.GetFieldValueAsync<T>(ordinal, Arg.Any<CancellationToken>()).Returns(Task.FromResult(fieldValue));
+        _ = reader
+            .GetFieldValueAsync<object>(ordinal, Arg.Any<CancellationToken>())
+            .Returns(Task.FromResult(fieldValue));
 
-        var result = await reader.GetFieldValueAsync<T>(columnName);
+        var result = await reader.GetFieldValueAsync<object>(columnName);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
@@ -219,17 +221,17 @@ public class DbDataReaderExtensionsTests
 
     [Test]
     [MethodDataSource(nameof(GetFieldValueOrDefaultIntData))]
-    public async Task GetFieldValueOrDefault_Int_Theory_Expected<T>(T expected, bool isDBNull, T fieldValue)
+    public async Task GetFieldValueOrDefault_Int_Theory_Expected(object? expected, bool isDBNull, object? fieldValue)
     {
         var reader = Substitute.For<DbDataReader>();
         var index = 0;
         _ = reader.IsDBNull(index).Returns(isDBNull);
         if (!isDBNull)
         {
-            _ = reader.GetFieldValue<T>(index).Returns(fieldValue);
+            _ = reader.GetFieldValue<object>(index).Returns(fieldValue);
         }
 
-        var result = reader.GetFieldValueOrDefault<T>(index);
+        var result = reader.GetFieldValueOrDefault<object>(index);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
@@ -238,11 +240,11 @@ public class DbDataReaderExtensionsTests
         [
             (null, true, "test"),
             ("test", false, "test"),
-            (0, true, 42),
+            (null, true, 42),
             (42, false, 42),
-            (false, true, true),
+            (null, true, true),
             (true, false, true),
-            (default(DateTime), true, DateTime.Now),
+            (null, true, DateTime.Now),
             (
                 DateTime.Parse("2023-01-01", CultureInfo.InvariantCulture),
                 false,
@@ -318,11 +320,11 @@ public class DbDataReaderExtensionsTests
 
     [Test]
     [MethodDataSource(nameof(GetFieldValueOrDefaultStringData))]
-    public async Task GetFieldValueOrDefault_String_Theory_Expected<T>(
-        T expected,
+    public async Task GetFieldValueOrDefault_String_Theory_Expected(
+        object? expected,
         string columnName,
         bool isDBNull,
-        T fieldValue
+        object? fieldValue
     )
     {
         var reader = Substitute.For<DbDataReader>();
@@ -331,10 +333,10 @@ public class DbDataReaderExtensionsTests
         _ = reader.IsDBNull(ordinal).Returns(isDBNull);
         if (!isDBNull)
         {
-            _ = reader.GetFieldValue<T>(ordinal).Returns(fieldValue);
+            _ = reader.GetFieldValue<object>(ordinal).Returns(fieldValue);
         }
 
-        var result = reader.GetFieldValueOrDefault<T>(columnName);
+        var result = reader.GetFieldValueOrDefault<object>(columnName);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
@@ -343,9 +345,9 @@ public class DbDataReaderExtensionsTests
         [
             (null, "stringColumn", true, "test"),
             ("test", "stringColumn", false, "test"),
-            (0, "intColumn", true, 42),
+            (null, "intColumn", true, 42),
             (42, "intColumn", false, 42),
-            (false, "boolColumn", true, true),
+            (null, "boolColumn", true, true),
             (true, "boolColumn", false, true),
         ];
 
@@ -404,17 +406,21 @@ public class DbDataReaderExtensionsTests
 
     [Test]
     [MethodDataSource(nameof(GetFieldValueOrDefaultAsyncIntData))]
-    public async Task GetFieldValueOrDefaultAsync_Int_Theory_Expected<T>(T expected, bool isDBNull, T fieldValue)
+    public async Task GetFieldValueOrDefaultAsync_Int_Theory_Expected(
+        object? expected,
+        bool isDBNull,
+        object? fieldValue
+    )
     {
         var reader = Substitute.For<DbDataReader>();
         var index = 0;
         _ = reader.IsDBNullAsync(index).Returns(Task.FromResult(isDBNull));
         if (!isDBNull)
         {
-            _ = reader.GetFieldValueAsync<T>(index).Returns(Task.FromResult(fieldValue));
+            _ = reader.GetFieldValueAsync<object>(index).Returns(Task.FromResult(fieldValue));
         }
 
-        var result = await reader.GetFieldValueOrDefaultAsync<T>(index);
+        var result = await reader.GetFieldValueOrDefaultAsync<object>(index);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
@@ -423,11 +429,11 @@ public class DbDataReaderExtensionsTests
         [
             (null, true, "test"),
             ("test", false, "test"),
-            (0, true, 42),
+            (null, true, 42),
             (42, false, 42),
-            (false, true, true),
+            (null, true, true),
             (true, false, true),
-            (default(DateTime), true, DateTime.Now),
+            (null, true, DateTime.Now),
             (
                 DateTime.Parse("2023-01-01", CultureInfo.InvariantCulture),
                 false,
@@ -526,11 +532,11 @@ public class DbDataReaderExtensionsTests
 
     [Test]
     [MethodDataSource(nameof(GetFieldValueOrDefaultAsyncStringData))]
-    public async Task GetFieldValueOrDefaultAsync_String_Theory_Expected<T>(
-        T expected,
+    public async Task GetFieldValueOrDefaultAsync_String_Theory_Expected(
+        object? expected,
         string columnName,
         bool isDBNull,
-        T fieldValue
+        object? fieldValue
     )
     {
         var reader = Substitute.For<DbDataReader>();
@@ -539,10 +545,10 @@ public class DbDataReaderExtensionsTests
         _ = reader.IsDBNullAsync(ordinal).Returns(Task.FromResult(isDBNull));
         if (!isDBNull)
         {
-            _ = reader.GetFieldValueAsync<T>(ordinal).Returns(Task.FromResult(fieldValue));
+            _ = reader.GetFieldValueAsync<object>(ordinal).Returns(Task.FromResult(fieldValue));
         }
 
-        var result = await reader.GetFieldValueOrDefaultAsync<T>(columnName);
+        var result = await reader.GetFieldValueOrDefaultAsync<object>(columnName);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
@@ -551,9 +557,9 @@ public class DbDataReaderExtensionsTests
         [
             (null, "stringColumn", true, "test"),
             ("test", "stringColumn", false, "test"),
-            (0, "intColumn", true, 42),
+            (null, "intColumn", true, 42),
             (42, "intColumn", false, 42),
-            (false, "boolColumn", true, true),
+            (null, "boolColumn", true, true),
             (true, "boolColumn", false, true),
         ];
 }
