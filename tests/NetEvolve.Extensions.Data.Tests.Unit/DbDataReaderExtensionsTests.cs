@@ -165,7 +165,7 @@ public class DbDataReaderExtensionsTests
         _ = reader.GetOrdinal(columnName).Returns(ordinal);
         _ = reader
             .GetFieldValueAsync<object>(ordinal, Arg.Any<CancellationToken>())
-            .Returns(Task.FromResult(fieldValue));
+            .Returns<object>(Task.FromResult(fieldValue));
 
         var result = await reader.GetFieldValueAsync<object>(columnName);
 
@@ -417,7 +417,7 @@ public class DbDataReaderExtensionsTests
         _ = reader.IsDBNullAsync(index).Returns(Task.FromResult(isDBNull));
         if (!isDBNull)
         {
-            _ = reader.GetFieldValueAsync<object>(index).Returns(Task.FromResult(fieldValue));
+            _ = reader.GetFieldValueAsync<object>(index).Returns<object>(Task.FromResult(fieldValue));
         }
 
         var result = await reader.GetFieldValueOrDefaultAsync<object>(index);
@@ -545,7 +545,7 @@ public class DbDataReaderExtensionsTests
         _ = reader.IsDBNullAsync(ordinal).Returns(Task.FromResult(isDBNull));
         if (!isDBNull)
         {
-            _ = reader.GetFieldValueAsync<object>(ordinal).Returns(Task.FromResult(fieldValue));
+            _ = reader.GetFieldValueAsync<object>(ordinal).Returns<object>(Task.FromResult(fieldValue));
         }
 
         var result = await reader.GetFieldValueOrDefaultAsync<object>(columnName);
