@@ -163,9 +163,7 @@ public class DbDataReaderExtensionsTests
         var reader = Substitute.For<DbDataReader>();
         var ordinal = 0;
         _ = reader.GetOrdinal(columnName).Returns(ordinal);
-        _ = reader
-            .GetFieldValueAsync<object>(ordinal, Arg.Any<CancellationToken>())
-            .Returns<object>(Task.FromResult(fieldValue));
+        _ = reader.GetFieldValueAsync<object>(ordinal, Arg.Any<CancellationToken>()).Returns<object>(fieldValue);
 
         var result = await reader.GetFieldValueAsync<object>(columnName);
 
@@ -414,10 +412,10 @@ public class DbDataReaderExtensionsTests
     {
         var reader = Substitute.For<DbDataReader>();
         var index = 0;
-        _ = reader.IsDBNullAsync(index).Returns(Task.FromResult(isDBNull));
+        _ = reader.IsDBNullAsync(index).Returns(isDBNull);
         if (!isDBNull)
         {
-            _ = reader.GetFieldValueAsync<object>(index).Returns<object>(Task.FromResult(fieldValue));
+            _ = reader.GetFieldValueAsync<object>(index).Returns<object>(fieldValue);
         }
 
         var result = await reader.GetFieldValueOrDefaultAsync<object>(index);
@@ -542,10 +540,10 @@ public class DbDataReaderExtensionsTests
         var reader = Substitute.For<DbDataReader>();
         var ordinal = 0;
         _ = reader.GetOrdinal(columnName).Returns(ordinal);
-        _ = reader.IsDBNullAsync(ordinal).Returns(Task.FromResult(isDBNull));
+        _ = reader.IsDBNullAsync(ordinal).Returns(isDBNull);
         if (!isDBNull)
         {
-            _ = reader.GetFieldValueAsync<object>(ordinal).Returns<object>(Task.FromResult(fieldValue));
+            _ = reader.GetFieldValueAsync<object>(ordinal).Returns<object>(fieldValue);
         }
 
         var result = await reader.GetFieldValueOrDefaultAsync<object>(columnName);
