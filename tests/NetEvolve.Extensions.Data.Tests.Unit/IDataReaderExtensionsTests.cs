@@ -5,7 +5,7 @@ using NSubstitute;
 
 public class IDataReaderExtensionsTests
 {
-    [Fact]
+    [Test]
     public void HasColumn_WhenReaderIsNull_ThrowsArgumentNullException()
     {
         // Arrange
@@ -13,13 +13,10 @@ public class IDataReaderExtensionsTests
         var name = "Id";
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => reader.HasColumn(name));
-
-        // Assert
-        Assert.Equal("reader", exception.ParamName);
+        _ = Assert.Throws<ArgumentNullException>("reader", () => reader.HasColumn(name));
     }
 
-    [Fact]
+    [Test]
     public void HasColumn_WhenNameIsNull_ThrowsArgumentNullException()
     {
         // Arrange
@@ -27,13 +24,10 @@ public class IDataReaderExtensionsTests
         string name = null!;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => reader.HasColumn(name));
-
-        // Assert
-        Assert.Equal("name", exception.ParamName);
+        _ = Assert.Throws<ArgumentNullException>("name", () => reader.HasColumn(name));
     }
 
-    [Fact]
+    [Test]
     public void HasColumn_WhenNameIsEmpty_ThrowsArgumentNullException()
     {
         // Arrange
@@ -41,15 +35,12 @@ public class IDataReaderExtensionsTests
         var name = string.Empty;
 
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => reader.HasColumn(name));
-
-        // Assert
-        Assert.Equal("name", exception.ParamName);
+        _ = Assert.Throws<ArgumentException>("name", () => reader.HasColumn(name));
     }
 
-    [Theory]
-    [MemberData(nameof(HasColumnData))]
-    public void HasColumn_Theory_Expected(bool expected, string name)
+    [Test]
+    [MethodDataSource(nameof(HasColumnData))]
+    public async Task HasColumn_Theory_Expected(bool expected, string name)
     {
         // Arrange
         var reader = Substitute.For<IDataReader>();
@@ -63,14 +54,8 @@ public class IDataReaderExtensionsTests
         var result = reader.HasColumn(name);
 
         // Assert
-        Assert.Equal(expected, result);
+        _ = await Assert.That(result).IsEqualTo(expected);
     }
 
-    public static TheoryData<bool, string> HasColumnData =>
-        new TheoryData<bool, string>
-        {
-            { true, "Id" },
-            { true, "namE" },
-            { false, "Mail" },
-        };
+    public static IEnumerable<(bool, string)> HasColumnData => [(true, "Id"), (true, "namE"), (false, "Mail")];
 }

@@ -1,8 +1,8 @@
 ﻿namespace NetEvolve.Extensions.Data.Tests.Integration;
 
 using System.Data;
+using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
-using Xunit;
 
 public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
 {
@@ -56,12 +56,12 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
         _ = command.ExecuteNonQuery();
     }
 
-    [Fact]
-    public void HasColumn_ExistingColumns_ReturnsTrue()
+    [Test]
+    public async Task HasColumn_ExistingColumns_ReturnsTrue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
         var hasId = reader.HasColumn("Id");
         var hasName = reader.HasColumn("Name");
@@ -70,50 +70,60 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
         var hasIsActive = reader.HasColumn("IsActive");
         var hasCreatedDate = reader.HasColumn("CreatedDate");
 
-        Assert.True(hasId);
-        Assert.True(hasName);
-        Assert.True(hasEmail);
-        Assert.True(hasAge);
-        Assert.True(hasIsActive);
-        Assert.True(hasCreatedDate);
+        using (Assert.Multiple())
+        {
+            _ = await Assert.That(hasId).IsTrue();
+            _ = await Assert.That(hasName).IsTrue();
+            _ = await Assert.That(hasEmail).IsTrue();
+            _ = await Assert.That(hasEmail).IsTrue();
+            _ = await Assert.That(hasAge).IsTrue();
+            _ = await Assert.That(hasIsActive).IsTrue();
+            _ = await Assert.That(hasCreatedDate).IsTrue();
+        }
     }
 
-    [Fact]
-    public void HasColumn_NonExistingColumns_ReturnsFalse()
+    [Test]
+    public async Task HasColumn_NonExistingColumns_ReturnsFalse()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
         var hasNonExistent = reader.HasColumn("NonExistentColumn");
         var hasWrongCase = reader.HasColumn("WRONGCASE");
 
-        Assert.False(hasNonExistent);
-        Assert.False(hasWrongCase);
+        using (Assert.Multiple())
+        {
+            _ = await Assert.That(hasNonExistent).IsFalse();
+            _ = await Assert.That(hasWrongCase).IsFalse();
+        }
     }
 
-    [Fact]
-    public void HasColumn_CaseInsensitiveMatching_ReturnsTrue()
+    [Test]
+    public async Task HasColumn_CaseInsensitiveMatching_ReturnsTrue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
         var hasIdLowercase = reader.HasColumn("id");
         var hasNameUppercase = reader.HasColumn("NAME");
         var hasEmailMixedCase = reader.HasColumn("EmAiL");
 
-        Assert.True(hasIdLowercase);
-        Assert.True(hasNameUppercase);
-        Assert.True(hasEmailMixedCase);
+        using (Assert.Multiple())
+        {
+            _ = await Assert.That(hasIdLowercase).IsTrue();
+            _ = await Assert.That(hasNameUppercase).IsTrue();
+            _ = await Assert.That(hasEmailMixedCase).IsTrue();
+        }
     }
 
-    [Fact]
-    public void HasColumn_SubsetOfSelectedColumns_ReturnsCorrectResults()
+    [Test]
+    public async Task HasColumn_SubsetOfSelectedColumns_ReturnsCorrectResults()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Id, Name, Email FROM TestTable";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
         var hasId = reader.HasColumn("Id");
         var hasName = reader.HasColumn("Name");
@@ -121,115 +131,118 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
         var hasAge = reader.HasColumn("Age"); // Not selected
         var hasIsActive = reader.HasColumn("IsActive"); // Not selected
 
-        Assert.True(hasId);
-        Assert.True(hasName);
-        Assert.True(hasEmail);
-        Assert.False(hasAge);
-        Assert.False(hasIsActive);
+        using (Assert.Multiple())
+        {
+            _ = await Assert.That(hasId).IsTrue();
+            _ = await Assert.That(hasName).IsTrue();
+            _ = await Assert.That(hasEmail).IsTrue();
+            _ = await Assert.That(hasAge).IsFalse();
+            _ = await Assert.That(hasIsActive).IsFalse();
+        }
     }
 
-    [Fact]
-    public void HasColumn_AliasedColumns_ReturnsCorrectResults()
+    [Test]
+    public async Task HasColumn_AliasedColumns_ReturnsCorrectResults()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Id AS UserId, Name AS FullName FROM TestTable";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
         var hasUserId = reader.HasColumn("UserId");
         var hasFullName = reader.HasColumn("FullName");
         var hasId = reader.HasColumn("Id"); // Original column name
         var hasName = reader.HasColumn("Name"); // Original column name
 
-        Assert.True(hasUserId);
-        Assert.True(hasFullName);
-        Assert.False(hasId);
-        Assert.False(hasName);
+        using (Assert.Multiple())
+        {
+            _ = await Assert.That(hasUserId).IsTrue();
+            _ = await Assert.That(hasFullName).IsTrue();
+            _ = await Assert.That(hasId).IsFalse();
+            _ = await Assert.That(hasName).IsFalse();
+        }
     }
 
-    [Fact]
-    public void HasColumn_ComputedColumns_ReturnsCorrectResults()
+    [Test]
+    public async Task HasColumn_ComputedColumns_ReturnsCorrectResults()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT COUNT(*) AS TotalCount, MAX(Age) AS MaxAge FROM TestTable";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
         var hasTotalCount = reader.HasColumn("TotalCount");
         var hasMaxAge = reader.HasColumn("MaxAge");
         var hasId = reader.HasColumn("Id"); // Not in result set
 
-        Assert.True(hasTotalCount);
-        Assert.True(hasMaxAge);
-        Assert.False(hasId);
+        using (Assert.Multiple())
+        {
+            _ = await Assert.That(hasTotalCount).IsTrue();
+            _ = await Assert.That(hasMaxAge).IsTrue();
+            _ = await Assert.That(hasId).IsFalse();
+        }
     }
 
-    [Theory]
-    [InlineData("Id")]
-    [InlineData("Name")]
-    [InlineData("Email")]
-    [InlineData("Age")]
-    [InlineData("IsActive")]
-    [InlineData("CreatedDate")]
-    public void HasColumn_ValidColumnNames_ReturnsTrue(string columnName)
+    [Test]
+    [Arguments("Id")]
+    [Arguments("Name")]
+    [Arguments("Email")]
+    [Arguments("Age")]
+    [Arguments("IsActive")]
+    [Arguments("CreatedDate")]
+    public async Task HasColumn_ValidColumnNames_ReturnsTrue(string columnName)
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
         var hasColumn = reader.HasColumn(columnName);
 
-        Assert.True(hasColumn);
+        _ = await Assert.That(hasColumn).IsTrue();
     }
 
-    [Theory]
-    [InlineData("NonExistent")]
-    [InlineData("WrongColumn")]
-    [InlineData("InvalidName")]
-    public void HasColumn_InvalidColumnNames_ReturnsFalse(string columnName)
+    [Test]
+    [Arguments("NonExistent")]
+    [Arguments("WrongColumn")]
+    [Arguments("InvalidName")]
+    public async Task HasColumn_InvalidColumnNames_ReturnsFalse(string columnName)
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
         var hasColumn = reader.HasColumn(columnName);
 
-        Assert.False(hasColumn);
+        _ = await Assert.That(hasColumn).IsFalse();
     }
 
-    [Fact]
+    [Test]
     public void HasColumn_NullReader_ThrowsArgumentNullException()
     {
         IDataReader reader = null!;
 
-        var exception = Assert.Throws<ArgumentNullException>(() => reader.HasColumn("Id"));
-
-        Assert.Equal("reader", exception.ParamName);
+        _ = Assert.Throws<ArgumentNullException>("reader", () => reader.HasColumn("Id"));
     }
 
-    [Fact]
+    [Test]
     public void HasColumn_NullColumnName_ThrowsArgumentNullException()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
         using var reader = command.ExecuteReader();
 
-        var exception = Assert.Throws<ArgumentNullException>(() => reader.HasColumn(null!));
-
-        Assert.Equal("name", exception.ParamName);
+        _ = Assert.Throws<ArgumentNullException>("name", () => reader.HasColumn(null!));
     }
 
-    [Fact]
+    [Test]
     public void HasColumn_WhitespaceColumnName_ThrowsArgumentException()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
         using var reader = command.ExecuteReader();
 
-        var exception = Assert.Throws<ArgumentException>(() => reader.HasColumn("   "));
-
-        Assert.Equal("name", exception.ParamName);
+        _ = Assert.Throws<ArgumentException>("name", () => reader.HasColumn("   "));
     }
 
-    [Fact]
+    [Test]
     public void HasColumn_DisposedReader_ThrowsInvalidOperationException()
     {
         var command = _connection.CreateCommand();
