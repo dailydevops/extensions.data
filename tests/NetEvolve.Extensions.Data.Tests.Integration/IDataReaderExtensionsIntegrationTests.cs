@@ -73,8 +73,8 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
         using (Assert.Multiple())
         {
             _ = await Assert.That(hasId).IsTrue();
-            _ = await Assert.That(hasId).IsTrue();
             _ = await Assert.That(hasName).IsTrue();
+            _ = await Assert.That(hasEmail).IsTrue();
             _ = await Assert.That(hasEmail).IsTrue();
             _ = await Assert.That(hasAge).IsTrue();
             _ = await Assert.That(hasIsActive).IsTrue();
