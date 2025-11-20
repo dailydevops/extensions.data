@@ -1,28 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>$(NetEvolve_TestTargetFrameworks)</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="NetEvolve.Extensions.XUnit" />
     <PackageReference Include="PublicApiGenerator" />
-    <PackageReference Include="Verify.Xunit" />
-    <PackageReference Include="xunit" />
-    <PackageReference Include="xunit.runner.visualstudio">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="coverlet.collector">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
+    <PackageReference Include="NetEvolve.Extensions.TUnit" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="TUnit" />
+    <PackageReference Include="Verify.TUnit" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\NetEvolve.Extensions.Data\NetEvolve.Extensions.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <AssemblyAttribute Include="NetEvolve.Extensions.XUnit.IntegrationTestAttribute" />
+    <AssemblyAttribute Include="NetEvolve.Extensions.TUnit.IntegrationTestAttribute" />
   </ItemGroup>
 </Project>

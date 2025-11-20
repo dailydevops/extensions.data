@@ -3,7 +3,6 @@
 using System.Data;
 using System.Globalization;
 using Microsoft.Data.Sqlite;
-using Xunit;
 
 public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
 {
@@ -101,518 +100,530 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         _ = command.ExecuteNonQuery();
     }
 
-    [Fact]
-    public void GetNullableBoolean_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableBoolean_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableBoolean(0);
 
-        Assert.True(result);
+        _ = await Assert.That(result).IsTrue();
     }
 
-    [Fact]
-    public void GetNullableBoolean_ByIndex_WithNullValue_ReturnsNull()
+    [Test]
+    public async Task GetNullableBoolean_ByIndex_WithNullValue_ReturnsNull()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableBoolean(0);
 
         Assert.Null(result);
     }
 
-    [Fact]
-    public void GetNullableBoolean_ByIndex_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableBoolean_ByIndex_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableBoolean(0, true);
 
-        Assert.True(result);
+        _ = await Assert.That(result).IsTrue();
     }
 
-    [Fact]
-    public void GetNullableBoolean_ByName_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableBoolean_ByName_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 3";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableBoolean("NullableBoolean");
 
-        Assert.False(result);
+        _ = await Assert.That(result).IsFalse();
     }
 
-    [Fact]
-    public void GetNullableBoolean_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableBoolean_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableBoolean("NullableBoolean", false);
 
-        Assert.False(result);
+        _ = await Assert.That(result).IsFalse();
     }
 
-    [Fact]
-    public void GetNullableByte_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableByte_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableByte FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableByte(0);
 
-        Assert.Equal((byte)255, result);
+        _ = await Assert.That(result).IsEqualTo((byte)255);
     }
 
-    [Fact]
-    public void GetNullableByte_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableByte_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableByte FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableByte("NullableByte", (byte)100);
 
-        Assert.Equal((byte)100, result);
+        _ = await Assert.That(result).IsEqualTo((byte)100);
     }
 
-    [Fact]
-    public void GetNullableChar_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableChar_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableChar FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableChar(0);
 
-        Assert.Equal('A', result);
+        _ = await Assert.That(result).IsEqualTo('A');
     }
 
-    [Fact]
-    public void GetNullableChar_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableChar_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableChar FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableChar("NullableChar", 'X');
 
-        Assert.Equal('X', result);
+        _ = await Assert.That(result).IsEqualTo('X');
     }
 
-    [Fact]
-    public void GetNullableDateTime_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableDateTime_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDateTime FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableDateTime(0);
 
-        Assert.Equal(DateTime.Parse("2023-01-15 10:30:00", CultureInfo.InvariantCulture), result);
+        _ = await Assert.That(result).IsEqualTo(DateTime.Parse("2023-01-15 10:30:00", CultureInfo.InvariantCulture));
     }
 
-    [Fact]
-    public void GetNullableDateTime_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableDateTime_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDateTime FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var defaultDate = new DateTime(2023, 12, 25, 0, 0, 0, DateTimeKind.Utc);
         var result = reader.GetNullableDateTime("NullableDateTime", defaultDate);
 
-        Assert.Equal(defaultDate, result);
+        _ = await Assert.That(result).IsEqualTo(defaultDate);
     }
 
-    [Fact]
-    public void GetNullableDecimal_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableDecimal_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDecimal FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableDecimal(0);
 
-        Assert.Equal(12345.67m, result);
+        _ = await Assert.That(result).IsEqualTo(12345.67m);
     }
 
-    [Fact]
-    public void GetNullableDecimal_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableDecimal_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDecimal FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableDecimal("NullableDecimal", 999.99m);
 
-        Assert.Equal(999.99m, result);
+        _ = await Assert.That(result).IsEqualTo(999.99m);
     }
 
-    [Fact]
-    public void GetNullableDouble_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableDouble_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDouble FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableDouble(0);
 
-        _ = Assert.NotNull(result);
-        Assert.True(Math.Abs(result.Value - 123.456) < 0.001);
+        using (Assert.Multiple())
+        {
+            Assert.NotNull(result);
+            _ = await Assert.That(Math.Abs(result.Value - 123.456) < 0.001).IsTrue();
+        }
     }
 
-    [Fact]
-    public void GetNullableDouble_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableDouble_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDouble FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableDouble("NullableDouble", 888.888);
 
-        _ = Assert.NotNull(result);
-        Assert.True(Math.Abs(result.Value - 888.888) < 0.001);
+        using (Assert.Multiple())
+        {
+            Assert.NotNull(result);
+            _ = await Assert.That(Math.Abs(result.Value - 888.888) < 0.001).IsTrue();
+        }
     }
 
-    [Fact]
-    public void GetNullableFloat_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableFloat_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableFloat FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableFloat(0);
 
-        _ = Assert.NotNull(result);
-        Assert.True(Math.Abs(result.Value - 78.9f) < 0.1f);
+        using (Assert.Multiple())
+        {
+            Assert.NotNull(result);
+            _ = await Assert.That(Math.Abs(result.Value - 78.9f) < 0.1f).IsTrue();
+        }
     }
 
-    [Fact]
-    public void GetNullableFloat_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableFloat_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableFloat FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableFloat("NullableFloat", 777.7f);
 
-        _ = Assert.NotNull(result);
-        Assert.True(Math.Abs(result.Value - 777.7f) < 0.1f);
+        using (Assert.Multiple())
+        {
+            Assert.NotNull(result);
+            _ = await Assert.That(Math.Abs(result.Value - 777.7f) < 0.1f).IsTrue();
+        }
     }
 
-    [Fact]
-    public void GetNullableGuid_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableGuid_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableGuid FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableGuid(0);
 
-        Assert.Equal(Guid.Parse("550e8400-e29b-41d4-a716-446655440000"), result);
+        _ = await Assert.That(result).IsEqualTo(Guid.Parse("550e8400-e29b-41d4-a716-446655440000"));
     }
 
-    [Fact]
-    public void GetNullableGuid_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableGuid_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableGuid FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var defaultGuid = Guid.Parse("00000000-0000-0000-0000-000000000001");
         var result = reader.GetNullableGuid("NullableGuid", defaultGuid);
 
-        Assert.Equal(defaultGuid, result);
+        _ = await Assert.That(result).IsEqualTo(defaultGuid);
     }
 
-    [Fact]
-    public void GetNullableInt16_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableInt16_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt16 FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableInt16(0);
 
-        Assert.Equal((short)32767, result);
+        _ = await Assert.That(result).IsEqualTo((short)32767);
     }
 
-    [Fact]
-    public void GetNullableInt16_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableInt16_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt16 FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableInt16("NullableInt16", (short)999);
 
-        Assert.Equal((short)999, result);
+        _ = await Assert.That(result).IsEqualTo((short)999);
     }
 
-    [Fact]
-    public void GetNullableInt16_ByName_WithNegativeValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableInt16_ByName_WithNegativeValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt16 FROM TestData WHERE Id = 3";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableInt16("NullableInt16");
 
-        Assert.Equal((short)-32768, result);
+        _ = await Assert.That(result).IsEqualTo((short)-32768);
     }
 
-    [Fact]
-    public void GetNullableInt32_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableInt32_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt32 FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableInt32(0);
 
-        Assert.Equal(2147483647, result);
+        _ = await Assert.That(result).IsEqualTo(2147483647);
     }
 
-    [Fact]
-    public void GetNullableInt32_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableInt32_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt32 FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableInt32("NullableInt32", 12345);
 
-        Assert.Equal(12345, result);
+        _ = await Assert.That(result).IsEqualTo(12345);
     }
 
-    [Fact]
-    public void GetNullableInt32_ByName_WithNegativeValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableInt32_ByName_WithNegativeValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt32 FROM TestData WHERE Id = 3";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableInt32("NullableInt32");
 
-        Assert.Equal(-2147483648, result);
+        _ = await Assert.That(result).IsEqualTo(-2147483648);
     }
 
-    [Fact]
-    public void GetNullableInt64_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableInt64_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt64 FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableInt64(0);
 
-        Assert.Equal(9223372036854775807L, result);
+        _ = await Assert.That(result).IsEqualTo(9223372036854775807L);
     }
 
-    [Fact]
-    public void GetNullableInt64_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableInt64_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt64 FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableInt64("NullableInt64", 987654321L);
 
-        Assert.Equal(987654321L, result);
+        _ = await Assert.That(result).IsEqualTo(987654321L);
     }
 
-    [Fact]
-    public void GetNullableInt64_ByName_WithNegativeValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableInt64_ByName_WithNegativeValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt64 FROM TestData WHERE Id = 3";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableInt64("NullableInt64");
 
-        Assert.Equal(-9223372036854775808L, result);
+        _ = await Assert.That(result).IsEqualTo(-9223372036854775808L);
     }
 
-    [Fact]
-    public void GetNullableString_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableString_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableString(0);
 
-        Assert.Equal("Not Null", result);
+        _ = await Assert.That(result).IsEqualTo("Not Null");
     }
 
-    [Fact]
-    public void GetNullableString_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableString_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableString("NullableString", "Default String");
 
-        Assert.Equal("Default String", result);
+        _ = await Assert.That(result).IsEqualTo("Default String");
     }
 
-    [Fact]
-    public void GetNullableString_ByName_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableString_ByName_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 3";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableString("NullableString");
 
-        Assert.Equal("Another String", result);
+        _ = await Assert.That(result).IsEqualTo("Another String");
     }
 
-    [Fact]
-    public void GetNullableValue_ByIndex_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableValue_ByIndex_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Name FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableValue(0);
 
-        Assert.Equal("John Doe", result);
+        _ = await Assert.That(result).IsEqualTo("John Doe");
     }
 
-    [Fact]
-    public void GetNullableValue_ByName_WithNullValue_ReturnsDefaultValue()
+    [Test]
+    public async Task GetNullableValue_ByName_WithNullValue_ReturnsDefaultValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 2";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableValue("NullableString", "Default Object");
 
-        Assert.Equal("Default Object", result);
+        _ = await Assert.That(result).IsEqualTo("Default Object");
     }
 
-    [Fact]
-    public void GetNullableValue_ByName_WithValidValue_ReturnsCorrectValue()
+    [Test]
+    public async Task GetNullableValue_ByName_WithValidValue_ReturnsCorrectValue()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Age FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
         var result = reader.GetNullableValue("Age");
 
-        Assert.Equal(30L, result); // SQLite returns INTEGER as long
+        _ = await Assert.That(result).IsEqualTo(30L); // SQLite returns INTEGER as long
     }
 
-    [Fact]
-    public void GetNullableBoolean_WithNullRecord_ThrowsArgumentNullException()
+    [Test]
+    public async Task GetNullableBoolean_WithNullRecord_ThrowsArgumentNullException()
     {
         IDataRecord record = null!;
 
         var exception = Assert.Throws<ArgumentNullException>(() => record.GetNullableBoolean(0));
 
-        Assert.Equal("record", exception.ParamName);
+        _ = await Assert.That(exception.ParamName).IsEqualTo("record");
     }
 
-    [Fact]
-    public void GetNullableBoolean_WithNullName_ThrowsArgumentNullException()
+    [Test]
+    public async Task GetNullableBoolean_WithNullName_ThrowsArgumentNullException()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
 
         var exception = Assert.Throws<ArgumentNullException>(() => reader.GetNullableBoolean(null!));
 
-        Assert.Equal("name", exception.ParamName);
+        _ = await Assert.That(exception.ParamName).IsEqualTo("name");
     }
 
-    [Fact]
-    public void GetNullableBoolean_WithEmptyName_ThrowsArgumentException()
+    [Test]
+    public async Task GetNullableBoolean_WithEmptyName_ThrowsArgumentException()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
 
         var exception = Assert.Throws<ArgumentException>(() => reader.GetNullableBoolean(""));
 
-        Assert.Equal("name", exception.ParamName);
+        _ = await Assert.That(exception.ParamName).IsEqualTo("name");
     }
 
-    [Fact]
-    public void GetNullableBoolean_WithInvalidIndex_ThrowsArgumentOutOfRangeException()
+    [Test]
+    public async Task GetNullableBoolean_WithInvalidIndex_ThrowsArgumentOutOfRangeException()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
 
         _ = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetNullableBoolean(10));
     }
 
-    [Fact]
-    public void GetNullableBoolean_WithInvalidColumnName_ThrowsArgumentOutOfRangeException()
+    [Test]
+    public async Task GetNullableBoolean_WithInvalidColumnName_ThrowsArgumentOutOfRangeException()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 1";
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
 
         _ = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetNullableBoolean("NonExistentColumn"));
     }
 
-    [Fact]
-    public void GetNullableValues_MultipleColumns_ReturnsCorrectValues()
+    [Test]
+    public async Task GetNullableValues_MultipleColumns_ReturnsCorrectValues()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = """
@@ -622,9 +633,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
                 NullableInt16, NullableInt32, NullableInt64, NullableString
             FROM TestData WHERE Id = 1
             """;
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
 
         var boolean = reader.GetNullableBoolean(0);
         var byteValue = reader.GetNullableByte(1);
@@ -639,24 +650,29 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         var int64Value = reader.GetNullableInt64(10);
         var stringValue = reader.GetNullableString(11);
 
-        Assert.True(boolean);
-        Assert.Equal((byte)255, byteValue);
-        Assert.Equal('A', charValue);
-        Assert.Equal(DateTime.Parse("2023-01-15 10:30:00", CultureInfo.InvariantCulture), dateTime);
-        Assert.Equal(12345.67m, decimalValue);
-        _ = Assert.NotNull(doubleValue);
-        Assert.True(Math.Abs(doubleValue.Value - 123.456) < 0.001);
-        _ = Assert.NotNull(floatValue);
-        Assert.True(Math.Abs(floatValue.Value - 78.9f) < 0.1f);
-        Assert.Equal(Guid.Parse("550e8400-e29b-41d4-a716-446655440000"), guidValue);
-        Assert.Equal((short)32767, int16Value);
-        Assert.Equal(2147483647, int32Value);
-        Assert.Equal(9223372036854775807L, int64Value);
-        Assert.Equal("Not Null", stringValue);
+        using (Assert.Multiple())
+        {
+            _ = await Assert.That(boolean).IsTrue();
+            _ = await Assert.That(byteValue).IsEqualTo((byte)255);
+            _ = await Assert.That(charValue).IsEqualTo('A');
+            _ = await Assert
+                .That(dateTime)
+                .IsEqualTo(DateTime.Parse("2023-01-15 10:30:00", CultureInfo.InvariantCulture));
+            _ = await Assert.That(decimalValue).IsEqualTo(12345.67m);
+            Assert.NotNull(doubleValue);
+            _ = await Assert.That(Math.Abs(doubleValue.Value - 123.456) < 0.001).IsTrue();
+            Assert.NotNull(floatValue);
+            _ = await Assert.That(Math.Abs(floatValue.Value - 78.9f) < 0.1f).IsTrue();
+            _ = await Assert.That(guidValue).IsEqualTo(Guid.Parse("550e8400-e29b-41d4-a716-446655440000"));
+            _ = await Assert.That(int16Value).IsEqualTo((short)32767);
+            _ = await Assert.That(int32Value).IsEqualTo(2147483647);
+            _ = await Assert.That(int64Value).IsEqualTo(9223372036854775807L);
+            _ = await Assert.That(stringValue).IsEqualTo("Not Null");
+        }
     }
 
-    [Fact]
-    public void GetNullableValues_AllNullColumns_ReturnsDefaultValues()
+    [Test]
+    public async Task GetNullableValues_AllNullColumns_ReturnsDefaultValues()
     {
         using var command = _connection.CreateCommand();
         command.CommandText = """
@@ -666,9 +682,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
                 NullableInt16, NullableInt32, NullableInt64, NullableString
             FROM TestData WHERE Id = 2
             """;
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
-        Assert.True(reader.Read());
+        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
 
         var boolean = reader.GetNullableBoolean("NullableBoolean", true);
         var byteValue = reader.GetNullableByte("NullableByte", (byte)100);
@@ -686,19 +702,22 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         var int64Value = reader.GetNullableInt64("NullableInt64", 789L);
         var stringValue = reader.GetNullableString("NullableString", "Default");
 
-        Assert.True(boolean);
-        Assert.Equal((byte)100, byteValue);
-        Assert.Equal('X', charValue);
-        Assert.Equal(new DateTime(2023, 12, 31, 0, 0, 0, DateTimeKind.Utc), dateTime);
-        Assert.Equal(999.99m, decimalValue);
-        _ = Assert.NotNull(doubleValue);
-        Assert.True(Math.Abs(doubleValue.Value - 888.888) < 0.001);
-        _ = Assert.NotNull(floatValue);
-        Assert.True(Math.Abs(floatValue.Value - 777.7f) < 0.1f);
-        Assert.Equal(Guid.Empty, guidValue);
-        Assert.Equal((short)123, int16Value);
-        Assert.Equal(456, int32Value);
-        Assert.Equal(789L, int64Value);
-        Assert.Equal("Default", stringValue);
+        using (Assert.Multiple())
+        {
+            _ = await Assert.That(boolean).IsTrue();
+            _ = await Assert.That(byteValue).IsEqualTo((byte)100);
+            _ = await Assert.That(charValue).IsEqualTo('X');
+            _ = await Assert.That(dateTime).IsEqualTo(new DateTime(2023, 12, 31, 0, 0, 0, DateTimeKind.Utc));
+            _ = await Assert.That(decimalValue).IsEqualTo(999.99m);
+            Assert.NotNull(doubleValue);
+            _ = await Assert.That(Math.Abs(doubleValue.Value - 888.888) < 0.001).IsTrue();
+            Assert.NotNull(floatValue);
+            _ = await Assert.That(Math.Abs(floatValue.Value - 777.7f) < 0.1f).IsTrue();
+            _ = await Assert.That(guidValue).IsEqualTo(Guid.Empty);
+            _ = await Assert.That(int16Value).IsEqualTo((short)123);
+            _ = await Assert.That(int32Value).IsEqualTo(456);
+            _ = await Assert.That(int64Value).IsEqualTo(789L);
+            _ = await Assert.That(stringValue).IsEqualTo("Default");
+        }
     }
 }
