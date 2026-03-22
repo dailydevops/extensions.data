@@ -1,7 +1,6 @@
 ﻿namespace NetEvolve.Extensions.Data;
 
 using System.Data.Common;
-using NetEvolve.Arguments;
 
 /// <summary>
 /// Provides extension methods for <see cref="DbDataReader"/> to safely retrieve field values with default fallback.
@@ -23,8 +22,8 @@ public static class DbDataReaderExtensions
     /// <exception cref="InvalidOperationException">Thrown if the column contains a <see langword="null"/> value and the specified type <typeparamref name="T"/> is not nullable.</exception>
     public static T GetFieldValue<T>(this DbDataReader reader, string name)
     {
-        Argument.ThrowIfNull(reader);
-        Argument.ThrowIfNullOrWhiteSpace(name);
+        ArgumentNullException.ThrowIfNull(reader);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         var ordinal = reader.GetOrdinal(name);
         return reader.GetFieldValue<T>(ordinal);
@@ -51,8 +50,8 @@ public static class DbDataReaderExtensions
         CancellationToken cancellationToken = default
     )
     {
-        Argument.ThrowIfNull(reader);
-        Argument.ThrowIfNullOrWhiteSpace(name);
+        ArgumentNullException.ThrowIfNull(reader);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         var ordinal = reader.GetOrdinal(name);
         return await reader.GetFieldValueAsync<T>(ordinal, cancellationToken).ConfigureAwait(false);
@@ -71,7 +70,7 @@ public static class DbDataReaderExtensions
     /// <exception cref="InvalidCastException">Thrown if the column value cannot be cast to the specified type <typeparamref name="T"/>.</exception>
     public static T GetFieldValueOrDefault<T>(this DbDataReader reader, int ordinal, T defaultValue = default!)
     {
-        Argument.ThrowIfNull(reader);
+        ArgumentNullException.ThrowIfNull(reader);
 
         if (reader.IsDBNull(ordinal))
         {
@@ -96,8 +95,8 @@ public static class DbDataReaderExtensions
     /// <exception cref="InvalidCastException">Thrown if the column value cannot be cast to the specified type <typeparamref name="T"/>.</exception>
     public static T GetFieldValueOrDefault<T>(this DbDataReader reader, string name, T defaultValue = default!)
     {
-        Argument.ThrowIfNull(reader);
-        Argument.ThrowIfNullOrWhiteSpace(name);
+        ArgumentNullException.ThrowIfNull(reader);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         var ordinal = reader.GetOrdinal(name);
 
@@ -129,7 +128,7 @@ public static class DbDataReaderExtensions
         CancellationToken cancellationToken = default
     )
     {
-        Argument.ThrowIfNull(reader);
+        ArgumentNullException.ThrowIfNull(reader);
 
         if (await reader.IsDBNullAsync(ordinal, cancellationToken).ConfigureAwait(false))
         {
@@ -161,8 +160,8 @@ public static class DbDataReaderExtensions
         CancellationToken cancellationToken = default
     )
     {
-        Argument.ThrowIfNull(reader);
-        Argument.ThrowIfNullOrWhiteSpace(name);
+        ArgumentNullException.ThrowIfNull(reader);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         var ordinal = reader.GetOrdinal(name);
 

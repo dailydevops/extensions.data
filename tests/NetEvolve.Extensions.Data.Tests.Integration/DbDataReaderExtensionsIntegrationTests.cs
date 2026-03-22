@@ -54,7 +54,7 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
         using var command = _connection.CreateCommand();
         command.CommandText = """
             INSERT INTO TestData (Id, Name, Age, IsActive, Salary, BirthDate, NullableInt, NullableText, NullableBoolean, NullableDouble)
-            VALUES 
+            VALUES
                 (1, 'John Doe', 30, 1, 50000.50, '1993-01-15', 100, 'Optional Text', 1, 123.45),
                 (2, 'Jane Smith', 25, 0, 45000.75, '1998-06-20', NULL, NULL, NULL, NULL),
                 (3, 'Bob Johnson', 35, 1, 60000.00, '1988-12-05', 200, 'Another Text', 0, 987.65)
