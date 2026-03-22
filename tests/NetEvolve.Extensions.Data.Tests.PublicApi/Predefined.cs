@@ -8,7 +8,7 @@ internal static class Predefined
     [ModuleInitializer]
     public static void Init()
     {
-        Verifier.DerivePathInfo(
+        DerivePathInfo(
             (sourceFile, projectDirectory, type, method) =>
             {
                 var directory = Path.Combine(projectDirectory, "_snapshots", Namer.TargetFrameworkNameAndVersion);

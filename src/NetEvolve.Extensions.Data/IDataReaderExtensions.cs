@@ -1,7 +1,6 @@
 ﻿namespace NetEvolve.Extensions.Data;
 
 using System.Data;
-using NetEvolve.Arguments;
 
 /// <summary>
 /// Provides extension methods for <see cref="IDataReader"/> to enhance data reader operations.
@@ -16,8 +15,8 @@ public static class IDataReaderExtensions
     /// <returns><see langword="true"/> if the column exists; otherwise, <see langword="false"/>.</returns>
     public static bool HasColumn(this IDataReader reader, string name)
     {
-        Argument.ThrowIfNull(reader);
-        Argument.ThrowIfNullOrWhiteSpace(name);
+        ArgumentNullException.ThrowIfNull(reader);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         return Enumerable
             .Range(0, reader.FieldCount)
