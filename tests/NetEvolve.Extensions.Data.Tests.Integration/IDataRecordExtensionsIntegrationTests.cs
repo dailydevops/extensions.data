@@ -348,7 +348,11 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableGuid(0);
 
-        _ = await Assert.That(result).IsEqualTo(new Guid(0x550e8400, 0xe29b, 0x41d4, 0xa7, 0x16, 0x44, 0x66, 0x55, 0x44, 0x0, 0x0) /* 550e8400-e29b-41d4-a716-446655440000 */);
+        _ = await Assert
+            .That(result)
+            .IsEqualTo(
+                new Guid(0x550e8400, 0xe29b, 0x41d4, 0xa7, 0x16, 0x44, 0x66, 0x55, 0x44, 0x0, 0x0) /* 550e8400-e29b-41d4-a716-446655440000 */
+            );
     }
 
     [Test]
@@ -359,7 +363,20 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
         using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
-        var defaultGuid = new Guid(0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1) /* 00000000-0000-0000-0000-000000000001 */;
+        var defaultGuid = new Guid(
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x1
+        ) /* 00000000-0000-0000-0000-000000000001 */
+        ;
         var result = reader.GetNullableGuid("NullableGuid", defaultGuid);
 
         _ = await Assert.That(result).IsEqualTo(defaultGuid);
@@ -663,7 +680,11 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
             _ = await Assert.That(Math.Abs(doubleValue.Value - 123.456) < 0.001).IsTrue();
             Assert.NotNull(floatValue);
             _ = await Assert.That(Math.Abs(floatValue.Value - 78.9f) < 0.1f).IsTrue();
-            _ = await Assert.That(guidValue).IsEqualTo(new Guid(0x550e8400, 0xe29b, 0x41d4, 0xa7, 0x16, 0x44, 0x66, 0x55, 0x44, 0x0, 0x0) /* 550e8400-e29b-41d4-a716-446655440000 */);
+            _ = await Assert
+                .That(guidValue)
+                .IsEqualTo(
+                    new Guid(0x550e8400, 0xe29b, 0x41d4, 0xa7, 0x16, 0x44, 0x66, 0x55, 0x44, 0x0, 0x0) /* 550e8400-e29b-41d4-a716-446655440000 */
+                );
             _ = await Assert.That(int16Value).IsEqualTo((short)32767);
             _ = await Assert.That(int32Value).IsEqualTo(2147483647);
             _ = await Assert.That(int64Value).IsEqualTo(9223372036854775807L);
