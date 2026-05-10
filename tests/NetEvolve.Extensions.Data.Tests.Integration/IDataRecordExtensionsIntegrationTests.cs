@@ -105,9 +105,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableBoolean(0);
 
         _ = await Assert.That(result).IsTrue();
@@ -118,9 +118,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableBoolean(0);
 
         Assert.Null(result);
@@ -131,9 +131,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableBoolean(0, true);
 
         _ = await Assert.That(result).IsTrue();
@@ -144,9 +144,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableBoolean("NullableBoolean");
 
         _ = await Assert.That(result).IsFalse();
@@ -157,9 +157,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableBoolean("NullableBoolean", false);
 
         _ = await Assert.That(result).IsFalse();
@@ -170,9 +170,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableByte FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableByte(0);
 
         _ = await Assert.That(result).IsEqualTo((byte)255);
@@ -183,9 +183,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableByte FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableByte("NullableByte", (byte)100);
 
         _ = await Assert.That(result).IsEqualTo((byte)100);
@@ -196,9 +196,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableChar FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableChar(0);
 
         _ = await Assert.That(result).IsEqualTo('A');
@@ -209,9 +209,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableChar FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableChar("NullableChar", 'X');
 
         _ = await Assert.That(result).IsEqualTo('X');
@@ -222,9 +222,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDateTime FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableDateTime(0);
 
         _ = await Assert.That(result).IsEqualTo(DateTime.Parse("2023-01-15 10:30:00", CultureInfo.InvariantCulture));
@@ -235,9 +235,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDateTime FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var defaultDate = new DateTime(2023, 12, 25, 0, 0, 0, DateTimeKind.Utc);
         var result = reader.GetNullableDateTime("NullableDateTime", defaultDate);
 
@@ -249,9 +249,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDecimal FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableDecimal(0);
 
         _ = await Assert.That(result).IsEqualTo(12345.67m);
@@ -262,9 +262,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDecimal FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableDecimal("NullableDecimal", 999.99m);
 
         _ = await Assert.That(result).IsEqualTo(999.99m);
@@ -275,9 +275,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDouble FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableDouble(0);
 
         using (Assert.Multiple())
@@ -292,9 +292,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDouble FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableDouble("NullableDouble", 888.888);
 
         using (Assert.Multiple())
@@ -309,9 +309,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableFloat FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableFloat(0);
 
         using (Assert.Multiple())
@@ -326,9 +326,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableFloat FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableFloat("NullableFloat", 777.7f);
 
         using (Assert.Multiple())
@@ -343,12 +343,12 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableGuid FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableGuid(0);
 
-        _ = await Assert.That(result).IsEqualTo(Guid.Parse("550e8400-e29b-41d4-a716-446655440000"));
+        _ = await Assert.That(result).IsEqualTo(new Guid(0x550e8400, 0xe29b, 0x41d4, 0xa7, 0x16, 0x44, 0x66, 0x55, 0x44, 0x0, 0x0) /* 550e8400-e29b-41d4-a716-446655440000 */);
     }
 
     [Test]
@@ -356,10 +356,10 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableGuid FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
-        var defaultGuid = Guid.Parse("00000000-0000-0000-0000-000000000001");
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        var defaultGuid = new Guid(0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1) /* 00000000-0000-0000-0000-000000000001 */;
         var result = reader.GetNullableGuid("NullableGuid", defaultGuid);
 
         _ = await Assert.That(result).IsEqualTo(defaultGuid);
@@ -370,9 +370,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt16 FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt16(0);
 
         _ = await Assert.That(result).IsEqualTo((short)32767);
@@ -383,9 +383,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt16 FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt16("NullableInt16", (short)999);
 
         _ = await Assert.That(result).IsEqualTo((short)999);
@@ -396,9 +396,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt16 FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt16("NullableInt16");
 
         _ = await Assert.That(result).IsEqualTo((short)-32768);
@@ -409,9 +409,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt32 FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt32(0);
 
         _ = await Assert.That(result).IsEqualTo(2147483647);
@@ -422,9 +422,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt32 FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt32("NullableInt32", 12345);
 
         _ = await Assert.That(result).IsEqualTo(12345);
@@ -435,9 +435,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt32 FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt32("NullableInt32");
 
         _ = await Assert.That(result).IsEqualTo(-2147483648);
@@ -448,9 +448,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt64 FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt64(0);
 
         _ = await Assert.That(result).IsEqualTo(9223372036854775807L);
@@ -461,9 +461,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt64 FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt64("NullableInt64", 987654321L);
 
         _ = await Assert.That(result).IsEqualTo(987654321L);
@@ -474,9 +474,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt64 FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt64("NullableInt64");
 
         _ = await Assert.That(result).IsEqualTo(-9223372036854775808L);
@@ -487,9 +487,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableString(0);
 
         _ = await Assert.That(result).IsEqualTo("Not Null");
@@ -500,9 +500,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableString("NullableString", "Default String");
 
         _ = await Assert.That(result).IsEqualTo("Default String");
@@ -513,9 +513,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableString("NullableString");
 
         _ = await Assert.That(result).IsEqualTo("Another String");
@@ -526,9 +526,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Name FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableValue(0);
 
         _ = await Assert.That(result).IsEqualTo("John Doe");
@@ -539,9 +539,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableValue("NullableString", "Default Object");
 
         _ = await Assert.That(result).IsEqualTo("Default Object");
@@ -552,9 +552,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Age FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableValue("Age");
 
         _ = await Assert.That(result).IsEqualTo(30L); // SQLite returns INTEGER as long
@@ -575,9 +575,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         var exception = Assert.Throws<ArgumentNullException>(() => reader.GetNullableBoolean(null!));
 
@@ -589,9 +589,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         var exception = Assert.Throws<ArgumentException>(() => reader.GetNullableBoolean(""));
 
@@ -603,9 +603,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         _ = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetNullableBoolean(10));
     }
@@ -615,9 +615,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         _ = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetNullableBoolean("NonExistentColumn"));
     }
@@ -633,9 +633,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
                 NullableInt16, NullableInt32, NullableInt64, NullableString
             FROM TestData WHERE Id = 1
             """;
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         var boolean = reader.GetNullableBoolean(0);
         var byteValue = reader.GetNullableByte(1);
@@ -663,7 +663,7 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
             _ = await Assert.That(Math.Abs(doubleValue.Value - 123.456) < 0.001).IsTrue();
             Assert.NotNull(floatValue);
             _ = await Assert.That(Math.Abs(floatValue.Value - 78.9f) < 0.1f).IsTrue();
-            _ = await Assert.That(guidValue).IsEqualTo(Guid.Parse("550e8400-e29b-41d4-a716-446655440000"));
+            _ = await Assert.That(guidValue).IsEqualTo(new Guid(0x550e8400, 0xe29b, 0x41d4, 0xa7, 0x16, 0x44, 0x66, 0x55, 0x44, 0x0, 0x0) /* 550e8400-e29b-41d4-a716-446655440000 */);
             _ = await Assert.That(int16Value).IsEqualTo((short)32767);
             _ = await Assert.That(int32Value).IsEqualTo(2147483647);
             _ = await Assert.That(int64Value).IsEqualTo(9223372036854775807L);
@@ -682,9 +682,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
                 NullableInt16, NullableInt32, NullableInt64, NullableString
             FROM TestData WHERE Id = 2
             """;
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         var boolean = reader.GetNullableBoolean("NullableBoolean", true);
         var byteValue = reader.GetNullableByte("NullableByte", (byte)100);

@@ -61,7 +61,7 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         var hasId = reader.HasColumn("Id");
         var hasName = reader.HasColumn("Name");
@@ -87,7 +87,7 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         var hasNonExistent = reader.HasColumn("NonExistentColumn");
         var hasWrongCase = reader.HasColumn("WRONGCASE");
@@ -104,7 +104,7 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         var hasIdLowercase = reader.HasColumn("id");
         var hasNameUppercase = reader.HasColumn("NAME");
@@ -123,7 +123,7 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Id, Name, Email FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         var hasId = reader.HasColumn("Id");
         var hasName = reader.HasColumn("Name");
@@ -146,7 +146,7 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Id AS UserId, Name AS FullName FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         var hasUserId = reader.HasColumn("UserId");
         var hasFullName = reader.HasColumn("FullName");
@@ -167,7 +167,7 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT COUNT(*) AS TotalCount, MAX(Age) AS MaxAge FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         var hasTotalCount = reader.HasColumn("TotalCount");
         var hasMaxAge = reader.HasColumn("MaxAge");
@@ -192,7 +192,7 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         var hasColumn = reader.HasColumn(columnName);
 
@@ -207,7 +207,7 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         var hasColumn = reader.HasColumn(columnName);
 

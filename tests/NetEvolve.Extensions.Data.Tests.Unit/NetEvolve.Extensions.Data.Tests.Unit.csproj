@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetEvolve_TestTargetFrameworks)</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
-    <NoWarn>$(NoWarn);TUnit0300;</NoWarn>
+    <NoWarn>$(NoWarn);MA0003;MA0042;RCS1261;TUnit0300</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
