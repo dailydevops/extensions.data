@@ -135,7 +135,7 @@ public class DbDataReaderExtensionsTests
             .GetFieldValueAsync<string>(ordinal, Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(expectedValue));
 
-        var result = await reader.GetFieldValueAsync<string>(name);
+        var result = await reader.GetFieldValueAsync<string>(name).ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expectedValue);
     }
@@ -151,7 +151,7 @@ public class DbDataReaderExtensionsTests
         _ = reader.GetOrdinal(name).Returns(ordinal);
         _ = reader.GetFieldValueAsync<string>(ordinal, cancellationToken).Returns(Task.FromResult(expectedValue));
 
-        var result = await reader.GetFieldValueAsync<string>(name, cancellationToken);
+        var result = await reader.GetFieldValueAsync<string>(name, cancellationToken).ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expectedValue);
     }
@@ -165,7 +165,7 @@ public class DbDataReaderExtensionsTests
         _ = reader.GetOrdinal(columnName).Returns(ordinal);
         _ = reader.GetFieldValueAsync<object>(ordinal, Arg.Any<CancellationToken>()).Returns<object>(fieldValue);
 
-        var result = await reader.GetFieldValueAsync<object>(columnName);
+        var result = await reader.GetFieldValueAsync<object>(columnName).ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
@@ -368,7 +368,7 @@ public class DbDataReaderExtensionsTests
         var index = 0;
         _ = reader.IsDBNullAsync(index).Returns(Task.FromResult(true));
 
-        var result = await reader.GetFieldValueOrDefaultAsync<string>(index);
+        var result = await reader.GetFieldValueOrDefaultAsync<string>(index).ConfigureAwait(false);
 
         Assert.Null(result);
     }
@@ -382,7 +382,7 @@ public class DbDataReaderExtensionsTests
         _ = reader.IsDBNullAsync(index).Returns(Task.FromResult(false));
         _ = reader.GetFieldValueAsync<string>(index).Returns(Task.FromResult(expectedValue));
 
-        var result = await reader.GetFieldValueOrDefaultAsync<string>(index);
+        var result = await reader.GetFieldValueOrDefaultAsync<string>(index).ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expectedValue);
     }
@@ -397,7 +397,9 @@ public class DbDataReaderExtensionsTests
         _ = reader.IsDBNullAsync(index, cancellationToken).Returns(Task.FromResult(false));
         _ = reader.GetFieldValueAsync<string>(index, cancellationToken).Returns(Task.FromResult(expectedValue));
 
-        var result = await reader.GetFieldValueOrDefaultAsync<string>(index, cancellationToken: cancellationToken);
+        var result = await reader
+            .GetFieldValueOrDefaultAsync<string>(index, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expectedValue);
     }
@@ -418,7 +420,7 @@ public class DbDataReaderExtensionsTests
             _ = reader.GetFieldValueAsync<object>(index).Returns<object>(fieldValue);
         }
 
-        var result = await reader.GetFieldValueOrDefaultAsync<object>(index);
+        var result = await reader.GetFieldValueOrDefaultAsync<object>(index).ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
@@ -490,7 +492,7 @@ public class DbDataReaderExtensionsTests
         _ = reader.GetOrdinal(name).Returns(ordinal);
         _ = reader.IsDBNullAsync(ordinal).Returns(Task.FromResult(true));
 
-        var result = await reader.GetFieldValueOrDefaultAsync<string>(name);
+        var result = await reader.GetFieldValueOrDefaultAsync<string>(name).ConfigureAwait(false);
 
         Assert.Null(result);
     }
@@ -506,7 +508,7 @@ public class DbDataReaderExtensionsTests
         _ = reader.IsDBNullAsync(ordinal).Returns(Task.FromResult(false));
         _ = reader.GetFieldValueAsync<string>(ordinal).Returns(Task.FromResult(expectedValue));
 
-        var result = await reader.GetFieldValueOrDefaultAsync<string>(name);
+        var result = await reader.GetFieldValueOrDefaultAsync<string>(name).ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expectedValue);
     }
@@ -523,7 +525,9 @@ public class DbDataReaderExtensionsTests
         _ = reader.IsDBNullAsync(ordinal, cancellationToken).Returns(Task.FromResult(false));
         _ = reader.GetFieldValueAsync<string>(ordinal, cancellationToken).Returns(Task.FromResult(expectedValue));
 
-        var result = await reader.GetFieldValueOrDefaultAsync<string>(name, cancellationToken: cancellationToken);
+        var result = await reader
+            .GetFieldValueOrDefaultAsync<string>(name, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expectedValue);
     }
@@ -546,7 +550,7 @@ public class DbDataReaderExtensionsTests
             _ = reader.GetFieldValueAsync<object>(ordinal).Returns<object>(fieldValue);
         }
 
-        var result = await reader.GetFieldValueOrDefaultAsync<object>(columnName);
+        var result = await reader.GetFieldValueOrDefaultAsync<object>(columnName).ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }

@@ -67,9 +67,9 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        var hasValue = await reader.ReadAsync();
+        var hasValue = await reader.ReadAsync().ConfigureAwait(false);
         _ = await Assert.That(hasValue).IsTrue();
 
         var id = reader.GetFieldValue<int>("Id");
@@ -93,9 +93,9 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        var hasValue = await reader.ReadAsync();
+        var hasValue = await reader.ReadAsync().ConfigureAwait(false);
         _ = await Assert.That(hasValue).IsTrue();
 
         _ = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetFieldValue<string>("NonExistentColumn"));
@@ -106,15 +106,15 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
-        var id = await reader.GetFieldValueAsync<int>("Id");
-        var name = await reader.GetFieldValueAsync<string>("Name");
-        var age = await reader.GetFieldValueAsync<int>("Age");
-        var isActive = await reader.GetFieldValueAsync<bool>("IsActive");
-        var salary = await reader.GetFieldValueAsync<double>("Salary");
+        var id = await reader.GetFieldValueAsync<int>("Id").ConfigureAwait(false);
+        var name = await reader.GetFieldValueAsync<string>("Name").ConfigureAwait(false);
+        var age = await reader.GetFieldValueAsync<int>("Age").ConfigureAwait(false);
+        var isActive = await reader.GetFieldValueAsync<bool>("IsActive").ConfigureAwait(false);
+        var salary = await reader.GetFieldValueAsync<double>("Salary").ConfigureAwait(false);
 
         using (Assert.Multiple())
         {
@@ -132,12 +132,12 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
         using var cts = new CancellationTokenSource();
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync(cts.Token);
+        using var reader = await command.ExecuteReaderAsync(cts.Token).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync(cts.Token)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cts.Token).ConfigureAwait(false)).IsTrue();
 
-        var id = await reader.GetFieldValueAsync<int>("Id", cts.Token);
-        var name = await reader.GetFieldValueAsync<string>("Name", cts.Token);
+        var id = await reader.GetFieldValueAsync<int>("Id", cts.Token).ConfigureAwait(false);
+        var name = await reader.GetFieldValueAsync<string>("Name", cts.Token).ConfigureAwait(false);
 
         using (Assert.Multiple())
         {
@@ -151,9 +151,9 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 2"; // Has NULL values
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        var hasValue = await reader.ReadAsync();
+        var hasValue = await reader.ReadAsync().ConfigureAwait(false);
         _ = await Assert.That(hasValue).IsTrue();
 
         var nullableInt = reader.GetFieldValueOrDefault<int?>("NullableInt");
@@ -175,9 +175,9 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 2"; // Has NULL values
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         var nullableInt = reader.GetFieldValueOrDefault("NullableInt", 999);
         var nullableText = reader.GetFieldValueOrDefault("NullableText", "Default Text");
@@ -198,9 +198,9 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1"; // Has actual values
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         var nullableInt = reader.GetFieldValueOrDefault("NullableInt", 999);
         var nullableText = reader.GetFieldValueOrDefault("NullableText", "Default Text");
@@ -221,9 +221,9 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt, NullableText FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         var nullableInt = reader.GetFieldValueOrDefault<int?>(0); // NullableInt ordinal
         var nullableText = reader.GetFieldValueOrDefault<string>(1); // NullableText ordinal
@@ -237,9 +237,9 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt, NullableText FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         var nullableInt = reader.GetFieldValueOrDefault(0, 777); // NullableInt ordinal
         var nullableText = reader.GetFieldValueOrDefault(1, "Custom Default"); // NullableText ordinal
@@ -256,14 +256,14 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 2"; // Has NULL values
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
-        var nullableInt = await reader.GetFieldValueOrDefaultAsync<int?>("NullableInt");
-        var nullableText = await reader.GetFieldValueOrDefaultAsync<string>("NullableText");
-        var nullableBoolean = await reader.GetFieldValueOrDefaultAsync<bool?>("NullableBoolean");
-        var nullableDouble = await reader.GetFieldValueOrDefaultAsync<double?>("NullableDouble");
+        var nullableInt = await reader.GetFieldValueOrDefaultAsync<int?>("NullableInt").ConfigureAwait(false);
+        var nullableText = await reader.GetFieldValueOrDefaultAsync<string>("NullableText").ConfigureAwait(false);
+        var nullableBoolean = await reader.GetFieldValueOrDefaultAsync<bool?>("NullableBoolean").ConfigureAwait(false);
+        var nullableDouble = await reader.GetFieldValueOrDefaultAsync<double?>("NullableDouble").ConfigureAwait(false);
 
         Assert.Null(nullableInt);
         Assert.Null(nullableText);
@@ -276,14 +276,16 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 2"; // Has NULL values
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
-        var nullableInt = await reader.GetFieldValueOrDefaultAsync("NullableInt", 888);
-        var nullableText = await reader.GetFieldValueOrDefaultAsync("NullableText", "Async Default");
-        var nullableBoolean = await reader.GetFieldValueOrDefaultAsync("NullableBoolean", true);
-        var nullableDouble = await reader.GetFieldValueOrDefaultAsync("NullableDouble", 888.88);
+        var nullableInt = await reader.GetFieldValueOrDefaultAsync("NullableInt", 888).ConfigureAwait(false);
+        var nullableText = await reader
+            .GetFieldValueOrDefaultAsync("NullableText", "Async Default")
+            .ConfigureAwait(false);
+        var nullableBoolean = await reader.GetFieldValueOrDefaultAsync("NullableBoolean", true).ConfigureAwait(false);
+        var nullableDouble = await reader.GetFieldValueOrDefaultAsync("NullableDouble", 888.88).ConfigureAwait(false);
 
         using (Assert.Multiple())
         {
@@ -299,14 +301,16 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 3"; // Has actual values
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
-        var nullableInt = await reader.GetFieldValueOrDefaultAsync("NullableInt", 888);
-        var nullableText = await reader.GetFieldValueOrDefaultAsync("NullableText", "Async Default");
-        var nullableBoolean = await reader.GetFieldValueOrDefaultAsync("NullableBoolean", true);
-        var nullableDouble = await reader.GetFieldValueOrDefaultAsync("NullableDouble", 888.88);
+        var nullableInt = await reader.GetFieldValueOrDefaultAsync("NullableInt", 888).ConfigureAwait(false);
+        var nullableText = await reader
+            .GetFieldValueOrDefaultAsync("NullableText", "Async Default")
+            .ConfigureAwait(false);
+        var nullableBoolean = await reader.GetFieldValueOrDefaultAsync("NullableBoolean", true).ConfigureAwait(false);
+        var nullableDouble = await reader.GetFieldValueOrDefaultAsync("NullableDouble", 888.88).ConfigureAwait(false);
 
         using (Assert.Multiple())
         {
@@ -322,12 +326,12 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt, NullableText FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
-        var nullableInt = await reader.GetFieldValueOrDefaultAsync<int?>(0); // NullableInt ordinal
-        var nullableText = await reader.GetFieldValueOrDefaultAsync<string>(1); // NullableText ordinal
+        var nullableInt = await reader.GetFieldValueOrDefaultAsync<int?>(0).ConfigureAwait(false); // NullableInt ordinal
+        var nullableText = await reader.GetFieldValueOrDefaultAsync<string>(1).ConfigureAwait(false); // NullableText ordinal
 
         Assert.Null(nullableInt);
         Assert.Null(nullableText);
@@ -338,12 +342,12 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt, NullableText FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
-        var nullableInt = await reader.GetFieldValueOrDefaultAsync(0, 666); // NullableInt ordinal
-        var nullableText = await reader.GetFieldValueOrDefaultAsync(1, "Async Ordinal Default"); // NullableText ordinal
+        var nullableInt = await reader.GetFieldValueOrDefaultAsync(0, 666).ConfigureAwait(false); // NullableInt ordinal
+        var nullableText = await reader.GetFieldValueOrDefaultAsync(1, "Async Ordinal Default").ConfigureAwait(false); // NullableText ordinal
 
         using (Assert.Multiple())
         {
@@ -358,12 +362,14 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
         using var cts = new CancellationTokenSource();
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync(cts.Token);
+        using var reader = await command.ExecuteReaderAsync(cts.Token).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync(cts.Token)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cts.Token).ConfigureAwait(false)).IsTrue();
 
-        var nullableInt = await reader.GetFieldValueOrDefaultAsync("NullableInt", 555, cts.Token);
-        var nullableText = await reader.GetFieldValueOrDefaultAsync("NullableText", "Token Default", cts.Token);
+        var nullableInt = await reader.GetFieldValueOrDefaultAsync("NullableInt", 555, cts.Token).ConfigureAwait(false);
+        var nullableText = await reader
+            .GetFieldValueOrDefaultAsync("NullableText", "Token Default", cts.Token)
+            .ConfigureAwait(false);
 
         using (Assert.Multiple())
         {
@@ -378,12 +384,14 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
         using var cts = new CancellationTokenSource();
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt, NullableText FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync(cts.Token);
+        using var reader = await command.ExecuteReaderAsync(cts.Token).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync(cts.Token)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cts.Token).ConfigureAwait(false)).IsTrue();
 
-        var nullableInt = await reader.GetFieldValueOrDefaultAsync(0, 444, cts.Token); // NullableInt ordinal
-        var nullableText = await reader.GetFieldValueOrDefaultAsync(1, "Ordinal Token Default", cts.Token); // NullableText ordinal
+        var nullableInt = await reader.GetFieldValueOrDefaultAsync(0, 444, cts.Token).ConfigureAwait(false); // NullableInt ordinal
+        var nullableText = await reader
+            .GetFieldValueOrDefaultAsync(1, "Ordinal Token Default", cts.Token)
+            .ConfigureAwait(false); // NullableText ordinal
 
         using (Assert.Multiple())
         {
@@ -397,9 +405,9 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Id, Name, Age, IsActive, Salary, BirthDate FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         var id = reader.GetFieldValue<long>("Id"); // SQLite INTEGER as long
         var name = reader.GetFieldValue<string>("Name");
@@ -424,9 +432,9 @@ public sealed class DbDataReaderExtensionsIntegrationTests : IDisposable
     {
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync();
+        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync()).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
 
         // Test invalid column name
         _ = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetFieldValueOrDefault<string>("InvalidColumn"));
