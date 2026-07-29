@@ -27,6 +27,7 @@
     <PackageVersion Include="PublicApiGenerator" Version="11.5.4" />
     <PackageVersion Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.53.3" />
     <PackageVersion Include="TUnit" Version="1.62.0" />
+    <PackageVersion Include="TUnit.Mocks" Version="1.62.0" />
     <PackageVersion Include="Verify.TUnit" Version="31.27.0" />
   </ItemGroup>
 </Project>

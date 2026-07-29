@@ -7,7 +7,6 @@
     <PackageReference Include="PublicApiGenerator" />
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
     <PackageReference Include="NetEvolve.Extensions.TUnit" />
-    <PackageReference Include="NSubstitute" />
     <PackageReference Include="TUnit" />
     <PackageReference Include="Verify.TUnit" />
   </ItemGroup>

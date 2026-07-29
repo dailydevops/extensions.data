@@ -1,7 +1,6 @@
 ﻿namespace NetEvolve.Extensions.Data.Tests.Unit;
 
 using System.Data;
-using NSubstitute;
 
 public class IDataReaderExtensionsTests
 {
@@ -20,7 +19,7 @@ public class IDataReaderExtensionsTests
     public void HasColumn_WhenNameIsNull_ThrowsArgumentNullException()
     {
         // Arrange
-        var reader = Substitute.For<IDataReader>();
+        var reader = IDataReader.Mock();
         string name = null!;
 
         // Act
@@ -31,7 +30,7 @@ public class IDataReaderExtensionsTests
     public void HasColumn_WhenNameIsEmpty_ThrowsArgumentNullException()
     {
         // Arrange
-        var reader = Substitute.For<IDataReader>();
+        var reader = IDataReader.Mock();
         var name = string.Empty;
 
         // Act
@@ -43,12 +42,12 @@ public class IDataReaderExtensionsTests
     public async Task HasColumn_Theory_Expected(bool expected, string name)
     {
         // Arrange
-        var reader = Substitute.For<IDataReader>();
+        var reader = IDataReader.Mock();
 
         _ = reader.FieldCount.Returns(2);
 
-        _ = reader.GetName(Arg.Is(0)).Returns("Id");
-        _ = reader.GetName(Arg.Is(1)).Returns("Name");
+        _ = reader.GetName(0).Returns("Id");
+        _ = reader.GetName(1).Returns("Name");
 
         // Act
         var result = reader.HasColumn(name);
