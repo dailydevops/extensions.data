@@ -13,6 +13,7 @@
       DbDataReader.this[int]/this[string] when generating a mock for the abstract DbDataReader
       class, because those indexers are abstract with no base implementation to forward to.
       Remove once TUnit.Mocks fixes generating mocks for abstract classes with abstract indexers.
+      https://github.com/thomhurst/TUnit/issues/6516
     -->
     <PackageReference Include="NSubstitute" />
     <PackageReference Include="TUnit" />
