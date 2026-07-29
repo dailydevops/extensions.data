@@ -1,7 +1,7 @@
 ﻿namespace NetEvolve.Extensions.Data.Tests.Unit;
 
 using System.Data;
-using NSubstitute;
+using System.Diagnostics.CodeAnalysis;
 
 public class IDataRecordExtensionsTests
 {
@@ -1468,57 +1468,62 @@ public class IDataRecordExtensionsTests
 
     private static readonly Guid _guidMax = Guid.NewGuid();
 
+    [SuppressMessage(
+        "Performance",
+        "CA1859:Use concrete types when possible for improved performance",
+        Justification = "Return type must stay IDataRecord to keep the mock's setup separate from the record used by callers."
+    )]
     private static IDataRecord CreateTestRecord()
     {
-        var record = Substitute.For<IDataRecord>();
+        var record = IDataRecord.Mock();
 
-        _ = record.GetOrdinal(Arg.Any<string>()).Returns(-1);
-        _ = record.GetOrdinal(Arg.Is("Id")).Returns(0);
-        _ = record.GetOrdinal(Arg.Is("Name")).Returns(1);
-        _ = record.GetOrdinal(Arg.Is("IsActive")).Returns(2);
+        _ = record.GetOrdinal(Any<string>()).Returns(-1);
+        _ = record.GetOrdinal("Id").Returns(0);
+        _ = record.GetOrdinal("Name").Returns(1);
+        _ = record.GetOrdinal("IsActive").Returns(2);
 
-        _ = record.IsDBNull(Arg.Any<int>()).Returns(false);
-        _ = record.IsDBNull(Arg.Is<int>(i => i < 0)).Throws<IndexOutOfRangeException>();
-        _ = record.IsDBNull(Arg.Is(0)).Returns(true);
+        _ = record.IsDBNull(Any<int>()).Returns(false);
+        _ = record.IsDBNull(i => i < 0).Throws<IndexOutOfRangeException>();
+        _ = record.IsDBNull(0).Returns(true);
 
-        _ = record.GetBoolean(Arg.Any<int>()).Returns(false);
-        _ = record.GetBoolean(Arg.Is(1)).Returns(true);
+        _ = record.GetBoolean(Any<int>()).Returns(false);
+        _ = record.GetBoolean(1).Returns(true);
 
-        _ = record.GetByte(Arg.Any<int>()).Returns<byte>(0x00b);
-        _ = record.GetByte(Arg.Is(1)).Returns<byte>(0x01b);
+        _ = record.GetByte(Any<int>()).Returns(0x00b);
+        _ = record.GetByte(1).Returns(0x01b);
 
-        _ = record.GetChar(Arg.Any<int>()).Returns(' ');
-        _ = record.GetChar(Arg.Is(1)).Returns('\t');
+        _ = record.GetChar(Any<int>()).Returns(' ');
+        _ = record.GetChar(1).Returns('\t');
 
-        _ = record.GetDateTime(Arg.Any<int>()).Returns(DateTime.MinValue);
-        _ = record.GetDateTime(Arg.Is(1)).Returns(DateTime.FromOADate(0));
+        _ = record.GetDateTime(Any<int>()).Returns(DateTime.MinValue);
+        _ = record.GetDateTime(1).Returns(DateTime.FromOADate(0));
 
-        _ = record.GetDecimal(Arg.Any<int>()).Returns(decimal.MinValue);
-        _ = record.GetDecimal(Arg.Is(1)).Returns(decimal.MaxValue);
+        _ = record.GetDecimal(Any<int>()).Returns(decimal.MinValue);
+        _ = record.GetDecimal(1).Returns(decimal.MaxValue);
 
-        _ = record.GetDouble(Arg.Any<int>()).Returns(double.MinValue);
-        _ = record.GetDouble(Arg.Is(1)).Returns(double.MaxValue);
+        _ = record.GetDouble(Any<int>()).Returns(double.MinValue);
+        _ = record.GetDouble(1).Returns(double.MaxValue);
 
-        _ = record.GetFloat(Arg.Any<int>()).Returns(float.MinValue);
-        _ = record.GetFloat(Arg.Is(1)).Returns(float.MaxValue);
+        _ = record.GetFloat(Any<int>()).Returns(float.MinValue);
+        _ = record.GetFloat(1).Returns(float.MaxValue);
 
-        _ = record.GetGuid(Arg.Any<int>()).Returns(Guid.Empty);
-        _ = record.GetGuid(Arg.Is(1)).Returns(_guidMax);
+        _ = record.GetGuid(Any<int>()).Returns(Guid.Empty);
+        _ = record.GetGuid(1).Returns(_guidMax);
 
-        _ = record.GetInt16(Arg.Any<int>()).Returns(short.MinValue);
-        _ = record.GetInt16(Arg.Is(1)).Returns(short.MaxValue);
+        _ = record.GetInt16(Any<int>()).Returns(short.MinValue);
+        _ = record.GetInt16(1).Returns(short.MaxValue);
 
-        _ = record.GetInt32(Arg.Any<int>()).Returns(int.MinValue);
-        _ = record.GetInt32(Arg.Is(1)).Returns(int.MaxValue);
+        _ = record.GetInt32(Any<int>()).Returns(int.MinValue);
+        _ = record.GetInt32(1).Returns(int.MaxValue);
 
-        _ = record.GetInt64(Arg.Any<int>()).Returns(long.MinValue);
-        _ = record.GetInt64(Arg.Is(1)).Returns(long.MaxValue);
+        _ = record.GetInt64(Any<int>()).Returns(long.MinValue);
+        _ = record.GetInt64(1).Returns(long.MaxValue);
 
-        _ = record.GetString(Arg.Any<int>()).Returns(string.Empty);
-        _ = record.GetString(Arg.Is(1)).Returns("Hello World!");
+        _ = record.GetString(Any<int>()).Returns(string.Empty);
+        _ = record.GetString(1).Returns("Hello World!");
 
-        _ = record.GetValue(Arg.Any<int>()).Returns(string.Empty);
-        _ = record.GetValue(Arg.Is(1)).Returns("Hello World!");
+        _ = record.GetValue(Any<int>()).Returns(string.Empty);
+        _ = record.GetValue(1).Returns("Hello World!");
 
         return record;
     }
