@@ -53,6 +53,8 @@ public static class DbDataReaderExtensions
         ArgumentNullException.ThrowIfNull(reader);
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
+        cancellationToken.ThrowIfCancellationRequested();
+
         var ordinal = reader.GetOrdinal(name);
         return await reader.GetFieldValueAsync<T>(ordinal, cancellationToken).ConfigureAwait(false);
     }
@@ -130,6 +132,8 @@ public static class DbDataReaderExtensions
     {
         ArgumentNullException.ThrowIfNull(reader);
 
+        cancellationToken.ThrowIfCancellationRequested();
+
         if (await reader.IsDBNullAsync(ordinal, cancellationToken).ConfigureAwait(false))
         {
             return defaultValue;
@@ -162,6 +166,8 @@ public static class DbDataReaderExtensions
     {
         ArgumentNullException.ThrowIfNull(reader);
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
+
+        cancellationToken.ThrowIfCancellationRequested();
 
         var ordinal = reader.GetOrdinal(name);
 
