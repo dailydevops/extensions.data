@@ -57,11 +57,13 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task HasColumn_ExistingColumns_ReturnsTrue()
+    public async Task HasColumn_ExistingColumns_ReturnsTrue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
         var hasId = reader.HasColumn("Id");
         var hasName = reader.HasColumn("Name");
@@ -83,11 +85,13 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task HasColumn_NonExistingColumns_ReturnsFalse()
+    public async Task HasColumn_NonExistingColumns_ReturnsFalse(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
         var hasNonExistent = reader.HasColumn("NonExistentColumn");
         var hasWrongCase = reader.HasColumn("WRONGCASE");
@@ -100,11 +104,13 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task HasColumn_CaseInsensitiveMatching_ReturnsTrue()
+    public async Task HasColumn_CaseInsensitiveMatching_ReturnsTrue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
         var hasIdLowercase = reader.HasColumn("id");
         var hasNameUppercase = reader.HasColumn("NAME");
@@ -119,11 +125,13 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task HasColumn_SubsetOfSelectedColumns_ReturnsCorrectResults()
+    public async Task HasColumn_SubsetOfSelectedColumns_ReturnsCorrectResults(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Id, Name, Email FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
         var hasId = reader.HasColumn("Id");
         var hasName = reader.HasColumn("Name");
@@ -142,11 +150,13 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task HasColumn_AliasedColumns_ReturnsCorrectResults()
+    public async Task HasColumn_AliasedColumns_ReturnsCorrectResults(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Id AS UserId, Name AS FullName FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
         var hasUserId = reader.HasColumn("UserId");
         var hasFullName = reader.HasColumn("FullName");
@@ -163,11 +173,13 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task HasColumn_ComputedColumns_ReturnsCorrectResults()
+    public async Task HasColumn_ComputedColumns_ReturnsCorrectResults(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT COUNT(*) AS TotalCount, MAX(Age) AS MaxAge FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
         var hasTotalCount = reader.HasColumn("TotalCount");
         var hasMaxAge = reader.HasColumn("MaxAge");
@@ -188,11 +200,13 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     [Arguments("Age")]
     [Arguments("IsActive")]
     [Arguments("CreatedDate")]
-    public async Task HasColumn_ValidColumnNames_ReturnsTrue(string columnName)
+    public async Task HasColumn_ValidColumnNames_ReturnsTrue(string columnName, CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
         var hasColumn = reader.HasColumn(columnName);
 
@@ -203,11 +217,13 @@ public sealed class IDataReaderExtensionsIntegrationTests : IDisposable
     [Arguments("NonExistent")]
     [Arguments("WrongColumn")]
     [Arguments("InvalidName")]
-    public async Task HasColumn_InvalidColumnNames_ReturnsFalse(string columnName)
+    public async Task HasColumn_InvalidColumnNames_ReturnsFalse(string columnName, CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestTable";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
         var hasColumn = reader.HasColumn(columnName);
 
