@@ -101,143 +101,167 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableBoolean_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableBoolean_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableBoolean(0);
 
         _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public async Task GetNullableBoolean_ByIndex_WithNullValue_ReturnsNull()
+    public async Task GetNullableBoolean_ByIndex_WithNullValue_ReturnsNull(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableBoolean(0);
 
         Assert.Null(result);
     }
 
     [Test]
-    public async Task GetNullableBoolean_ByIndex_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableBoolean_ByIndex_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableBoolean(0, true);
 
         _ = await Assert.That(result).IsTrue();
     }
 
     [Test]
-    public async Task GetNullableBoolean_ByName_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableBoolean_ByName_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableBoolean("NullableBoolean");
 
         _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public async Task GetNullableBoolean_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableBoolean_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableBoolean("NullableBoolean", false);
 
         _ = await Assert.That(result).IsFalse();
     }
 
     [Test]
-    public async Task GetNullableByte_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableByte_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableByte FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableByte(0);
 
         _ = await Assert.That(result).IsEqualTo((byte)255);
     }
 
     [Test]
-    public async Task GetNullableByte_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableByte_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableByte FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableByte("NullableByte", (byte)100);
 
         _ = await Assert.That(result).IsEqualTo((byte)100);
     }
 
     [Test]
-    public async Task GetNullableChar_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableChar_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableChar FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableChar(0);
 
         _ = await Assert.That(result).IsEqualTo('A');
     }
 
     [Test]
-    public async Task GetNullableChar_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableChar_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableChar FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableChar("NullableChar", 'X');
 
         _ = await Assert.That(result).IsEqualTo('X');
     }
 
     [Test]
-    public async Task GetNullableDateTime_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableDateTime_ByIndex_WithValidValue_ReturnsCorrectValue(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDateTime FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableDateTime(0);
 
         _ = await Assert.That(result).IsEqualTo(DateTime.Parse("2023-01-15 10:30:00", CultureInfo.InvariantCulture));
     }
 
     [Test]
-    public async Task GetNullableDateTime_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableDateTime_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDateTime FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var defaultDate = new DateTime(2023, 12, 25, 0, 0, 0, DateTimeKind.Utc);
         var result = reader.GetNullableDateTime("NullableDateTime", defaultDate);
 
@@ -245,39 +269,45 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableDecimal_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableDecimal_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDecimal FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableDecimal(0);
 
         _ = await Assert.That(result).IsEqualTo(12345.67m);
     }
 
     [Test]
-    public async Task GetNullableDecimal_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableDecimal_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDecimal FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableDecimal("NullableDecimal", 999.99m);
 
         _ = await Assert.That(result).IsEqualTo(999.99m);
     }
 
     [Test]
-    public async Task GetNullableDouble_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableDouble_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDouble FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableDouble(0);
 
         using (Assert.Multiple())
@@ -288,13 +318,15 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableDouble_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableDouble_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableDouble FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableDouble("NullableDouble", 888.888);
 
         using (Assert.Multiple())
@@ -305,13 +337,15 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableFloat_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableFloat_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableFloat FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableFloat(0);
 
         using (Assert.Multiple())
@@ -322,13 +356,15 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableFloat_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableFloat_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableFloat FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableFloat("NullableFloat", 777.7f);
 
         using (Assert.Multiple())
@@ -339,13 +375,15 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableGuid_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableGuid_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableGuid FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableGuid(0);
 
         _ = await Assert
@@ -356,13 +394,15 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableGuid_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableGuid_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableGuid FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var defaultGuid = new Guid(
             0x0,
             0x0,
@@ -383,195 +423,225 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableInt16_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableInt16_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt16 FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt16(0);
 
         _ = await Assert.That(result).IsEqualTo((short)32767);
     }
 
     [Test]
-    public async Task GetNullableInt16_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableInt16_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt16 FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt16("NullableInt16", (short)999);
 
         _ = await Assert.That(result).IsEqualTo((short)999);
     }
 
     [Test]
-    public async Task GetNullableInt16_ByName_WithNegativeValue_ReturnsCorrectValue()
+    public async Task GetNullableInt16_ByName_WithNegativeValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt16 FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt16("NullableInt16");
 
         _ = await Assert.That(result).IsEqualTo((short)-32768);
     }
 
     [Test]
-    public async Task GetNullableInt32_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableInt32_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt32 FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt32(0);
 
         _ = await Assert.That(result).IsEqualTo(2147483647);
     }
 
     [Test]
-    public async Task GetNullableInt32_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableInt32_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt32 FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt32("NullableInt32", 12345);
 
         _ = await Assert.That(result).IsEqualTo(12345);
     }
 
     [Test]
-    public async Task GetNullableInt32_ByName_WithNegativeValue_ReturnsCorrectValue()
+    public async Task GetNullableInt32_ByName_WithNegativeValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt32 FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt32("NullableInt32");
 
         _ = await Assert.That(result).IsEqualTo(-2147483648);
     }
 
     [Test]
-    public async Task GetNullableInt64_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableInt64_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt64 FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt64(0);
 
         _ = await Assert.That(result).IsEqualTo(9223372036854775807L);
     }
 
     [Test]
-    public async Task GetNullableInt64_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableInt64_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt64 FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt64("NullableInt64", 987654321L);
 
         _ = await Assert.That(result).IsEqualTo(987654321L);
     }
 
     [Test]
-    public async Task GetNullableInt64_ByName_WithNegativeValue_ReturnsCorrectValue()
+    public async Task GetNullableInt64_ByName_WithNegativeValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableInt64 FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableInt64("NullableInt64");
 
         _ = await Assert.That(result).IsEqualTo(-9223372036854775808L);
     }
 
     [Test]
-    public async Task GetNullableString_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableString_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableString(0);
 
         _ = await Assert.That(result).IsEqualTo("Not Null");
     }
 
     [Test]
-    public async Task GetNullableString_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableString_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableString("NullableString", "Default String");
 
         _ = await Assert.That(result).IsEqualTo("Default String");
     }
 
     [Test]
-    public async Task GetNullableString_ByName_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableString_ByName_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 3";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableString("NullableString");
 
         _ = await Assert.That(result).IsEqualTo("Another String");
     }
 
     [Test]
-    public async Task GetNullableValue_ByIndex_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableValue_ByIndex_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Name FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableValue(0);
 
         _ = await Assert.That(result).IsEqualTo("John Doe");
     }
 
     [Test]
-    public async Task GetNullableValue_ByName_WithNullValue_ReturnsDefaultValue()
+    public async Task GetNullableValue_ByName_WithNullValue_ReturnsDefaultValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableString FROM TestData WHERE Id = 2";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableValue("NullableString", "Default Object");
 
         _ = await Assert.That(result).IsEqualTo("Default Object");
     }
 
     [Test]
-    public async Task GetNullableValue_ByName_WithValidValue_ReturnsCorrectValue()
+    public async Task GetNullableValue_ByName_WithValidValue_ReturnsCorrectValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT Age FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
         var result = reader.GetNullableValue("Age");
 
         _ = await Assert.That(result).IsEqualTo(30L); // SQLite returns INTEGER as long
@@ -588,13 +658,15 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableBoolean_WithNullName_ThrowsArgumentNullException()
+    public async Task GetNullableBoolean_WithNullName_ThrowsArgumentNullException(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
 
         var exception = Assert.Throws<ArgumentNullException>(() => reader.GetNullableBoolean(null!));
 
@@ -602,13 +674,15 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableBoolean_WithEmptyName_ThrowsArgumentException()
+    public async Task GetNullableBoolean_WithEmptyName_ThrowsArgumentException(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT * FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
 
         var exception = Assert.Throws<ArgumentException>(() => reader.GetNullableBoolean(""));
 
@@ -616,32 +690,42 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableBoolean_WithInvalidIndex_ThrowsArgumentOutOfRangeException()
+    public async Task GetNullableBoolean_WithInvalidIndex_ThrowsArgumentOutOfRangeException(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
 
         _ = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetNullableBoolean(10));
     }
 
     [Test]
-    public async Task GetNullableBoolean_WithInvalidColumnName_ThrowsArgumentOutOfRangeException()
+    public async Task GetNullableBoolean_WithInvalidColumnName_ThrowsArgumentOutOfRangeException(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = "SELECT NullableBoolean FROM TestData WHERE Id = 1";
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
 
         _ = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetNullableBoolean("NonExistentColumn"));
     }
 
     [Test]
-    public async Task GetNullableValues_MultipleColumns_ReturnsCorrectValues()
+    public async Task GetNullableValues_MultipleColumns_ReturnsCorrectValues(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = """
             SELECT 
@@ -650,9 +734,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
                 NullableInt16, NullableInt32, NullableInt64, NullableString
             FROM TestData WHERE Id = 1
             """;
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
 
         var boolean = reader.GetNullableBoolean(0);
         var byteValue = reader.GetNullableByte(1);
@@ -693,8 +777,10 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
     }
 
     [Test]
-    public async Task GetNullableValues_AllNullColumns_ReturnsDefaultValues()
+    public async Task GetNullableValues_AllNullColumns_ReturnsDefaultValues(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using var command = _connection.CreateCommand();
         command.CommandText = """
             SELECT 
@@ -703,9 +789,9 @@ public sealed class IDataRecordExtensionsIntegrationTests : IDisposable
                 NullableInt16, NullableInt32, NullableInt64, NullableString
             FROM TestData WHERE Id = 2
             """;
-        using var reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-        _ = await Assert.That(await reader.ReadAsync().ConfigureAwait(false)).IsTrue();
+        _ = await Assert.That(await reader.ReadAsync(cancellationToken).ConfigureAwait(false)).IsTrue();
 
         var boolean = reader.GetNullableBoolean("NullableBoolean", true);
         var byteValue = reader.GetNullableByte("NullableByte", (byte)100);

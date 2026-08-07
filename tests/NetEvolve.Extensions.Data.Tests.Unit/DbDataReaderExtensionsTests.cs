@@ -125,8 +125,10 @@ public class DbDataReaderExtensionsTests
     }
 
     [Test]
-    public async Task GetFieldValueAsync_String_WhenValidName_ReturnsValue()
+    public async Task GetFieldValueAsync_String_WhenValidName_ReturnsValue(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var name = "column";
         var ordinal = 0;
@@ -134,19 +136,22 @@ public class DbDataReaderExtensionsTests
         _ = mock.GetOrdinal(name).Returns(ordinal);
         _ = mock.GetFieldValueAsync<string>(ordinal, Arg.Any<CancellationToken>()).Returns(expectedValue);
 
-        var result = await mock.Object.GetFieldValueAsync<string>(name).ConfigureAwait(false);
+        var result = await mock.Object.GetFieldValueAsync<string>(name, cancellationToken).ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expectedValue);
     }
 
     [Test]
-    public async Task GetFieldValueAsync_String_WithCancellationToken_WhenValidName_ReturnsValue()
+    public async Task GetFieldValueAsync_String_WithCancellationToken_WhenValidName_ReturnsValue(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var name = "column";
         var ordinal = 0;
         var expectedValue = "test";
-        var cancellationToken = new CancellationToken();
         _ = mock.GetOrdinal(name).Returns(ordinal);
         _ = mock.GetFieldValueAsync<string>(ordinal, cancellationToken).Returns(expectedValue);
 
@@ -157,14 +162,21 @@ public class DbDataReaderExtensionsTests
 
     [Test]
     [MethodDataSource(nameof(GetFieldValueAsyncStringData))]
-    public async Task GetFieldValueAsync_String_Theory_Expected(object? expected, string columnName, object? fieldValue)
+    public async Task GetFieldValueAsync_String_Theory_Expected(
+        object? expected,
+        string columnName,
+        object? fieldValue,
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var ordinal = 0;
         _ = mock.GetOrdinal(columnName).Returns(ordinal);
         _ = mock.GetFieldValueAsync<object>(ordinal, Arg.Any<CancellationToken>()).Returns(fieldValue);
 
-        var result = await mock.Object.GetFieldValueAsync<object>(columnName).ConfigureAwait(false);
+        var result = await mock.Object.GetFieldValueAsync<object>(columnName, cancellationToken).ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
@@ -361,38 +373,53 @@ public class DbDataReaderExtensionsTests
     }
 
     [Test]
-    public async Task GetFieldValueOrDefaultAsync_Int_WhenColumnIsDBNull_ReturnsDefault()
+    public async Task GetFieldValueOrDefaultAsync_Int_WhenColumnIsDBNull_ReturnsDefault(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var index = 0;
         _ = mock.IsDBNullAsync(index, Arg.Any<CancellationToken>()).Returns(true);
 
-        var result = await mock.Object.GetFieldValueOrDefaultAsync<string>(index).ConfigureAwait(false);
+        var result = await mock
+            .Object.GetFieldValueOrDefaultAsync<string>(index, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         Assert.Null(result);
     }
 
     [Test]
-    public async Task GetFieldValueOrDefaultAsync_Int_WhenColumnIsNotDBNull_ReturnsValue()
+    public async Task GetFieldValueOrDefaultAsync_Int_WhenColumnIsNotDBNull_ReturnsValue(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var index = 0;
         var expectedValue = "test";
         _ = mock.IsDBNullAsync(index, Arg.Any<CancellationToken>()).Returns(false);
         _ = mock.GetFieldValueAsync<string>(index, Arg.Any<CancellationToken>()).Returns(expectedValue);
 
-        var result = await mock.Object.GetFieldValueOrDefaultAsync<string>(index).ConfigureAwait(false);
+        var result = await mock
+            .Object.GetFieldValueOrDefaultAsync<string>(index, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expectedValue);
     }
 
     [Test]
-    public async Task GetFieldValueOrDefaultAsync_Int_WithCancellationToken_WhenColumnIsNotDBNull_ReturnsValue()
+    public async Task GetFieldValueOrDefaultAsync_Int_WithCancellationToken_WhenColumnIsNotDBNull_ReturnsValue(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var index = 0;
         var expectedValue = "test";
-        var cancellationToken = new CancellationToken();
         _ = mock.IsDBNullAsync(index, cancellationToken).Returns(false);
         _ = mock.GetFieldValueAsync<string>(index, cancellationToken).Returns(expectedValue);
 
@@ -408,9 +435,12 @@ public class DbDataReaderExtensionsTests
     public async Task GetFieldValueOrDefaultAsync_Int_Theory_Expected(
         object? expected,
         bool isDBNull,
-        object? fieldValue
+        object? fieldValue,
+        CancellationToken cancellationToken
     )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var index = 0;
         _ = mock.IsDBNullAsync(index, Arg.Any<CancellationToken>()).Returns(isDBNull);
@@ -419,7 +449,9 @@ public class DbDataReaderExtensionsTests
             _ = mock.GetFieldValueAsync<object>(index, Arg.Any<CancellationToken>()).Returns(fieldValue);
         }
 
-        var result = await mock.Object.GetFieldValueOrDefaultAsync<object>(index).ConfigureAwait(false);
+        var result = await mock
+            .Object.GetFieldValueOrDefaultAsync<object>(index, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
@@ -483,22 +515,32 @@ public class DbDataReaderExtensionsTests
     }
 
     [Test]
-    public async Task GetFieldValueOrDefaultAsync_String_WhenColumnIsDBNull_ReturnsDefault()
+    public async Task GetFieldValueOrDefaultAsync_String_WhenColumnIsDBNull_ReturnsDefault(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var name = "column";
         var ordinal = 0;
         _ = mock.GetOrdinal(name).Returns(ordinal);
         _ = mock.IsDBNullAsync(ordinal, Arg.Any<CancellationToken>()).Returns(true);
 
-        var result = await mock.Object.GetFieldValueOrDefaultAsync<string>(name).ConfigureAwait(false);
+        var result = await mock
+            .Object.GetFieldValueOrDefaultAsync<string>(name, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         Assert.Null(result);
     }
 
     [Test]
-    public async Task GetFieldValueOrDefaultAsync_String_WhenColumnIsNotDBNull_ReturnsValue()
+    public async Task GetFieldValueOrDefaultAsync_String_WhenColumnIsNotDBNull_ReturnsValue(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var name = "column";
         var ordinal = 0;
@@ -507,19 +549,24 @@ public class DbDataReaderExtensionsTests
         _ = mock.IsDBNullAsync(ordinal, Arg.Any<CancellationToken>()).Returns(false);
         _ = mock.GetFieldValueAsync<string>(ordinal, Arg.Any<CancellationToken>()).Returns(expectedValue);
 
-        var result = await mock.Object.GetFieldValueOrDefaultAsync<string>(name).ConfigureAwait(false);
+        var result = await mock
+            .Object.GetFieldValueOrDefaultAsync<string>(name, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expectedValue);
     }
 
     [Test]
-    public async Task GetFieldValueOrDefaultAsync_String_WithCancellationToken_WhenColumnIsNotDBNull_ReturnsValue()
+    public async Task GetFieldValueOrDefaultAsync_String_WithCancellationToken_WhenColumnIsNotDBNull_ReturnsValue(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var name = "column";
         var ordinal = 0;
         var expectedValue = "test";
-        var cancellationToken = new CancellationToken();
         _ = mock.GetOrdinal(name).Returns(ordinal);
         _ = mock.IsDBNullAsync(ordinal, cancellationToken).Returns(false);
         _ = mock.GetFieldValueAsync<string>(ordinal, cancellationToken).Returns(expectedValue);
@@ -537,9 +584,12 @@ public class DbDataReaderExtensionsTests
         object? expected,
         string columnName,
         bool isDBNull,
-        object? fieldValue
+        object? fieldValue,
+        CancellationToken cancellationToken
     )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var mock = Mock.Of<DbDataReader>();
         var ordinal = 0;
         _ = mock.GetOrdinal(columnName).Returns(ordinal);
@@ -549,7 +599,9 @@ public class DbDataReaderExtensionsTests
             _ = mock.GetFieldValueAsync<object>(ordinal, Arg.Any<CancellationToken>()).Returns(fieldValue);
         }
 
-        var result = await mock.Object.GetFieldValueOrDefaultAsync<object>(columnName).ConfigureAwait(false);
+        var result = await mock
+            .Object.GetFieldValueOrDefaultAsync<object>(columnName, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         _ = await Assert.That(result).IsEqualTo(expected);
     }
