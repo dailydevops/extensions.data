@@ -28,6 +28,6 @@
     <PackageVersion Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.53.3" />
     <PackageVersion Include="TUnit" Version="1.66.0" />
     <PackageVersion Include="TUnit.Mocks" Version="1.66.0" />
-    <PackageVersion Include="Verify.TUnit" Version="31.28.0" />
+    <PackageVersion Include="Verify.TUnit" Version="32.0.0" />
   </ItemGroup>
 </Project>
