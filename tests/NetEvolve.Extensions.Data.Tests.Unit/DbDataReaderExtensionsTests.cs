@@ -612,7 +612,9 @@ public class DbDataReaderExtensionsTests
         var reader = Mock.Of<DbDataReader>().Object;
         var token = new CancellationToken(true);
 
-        _ = await Assert.ThrowsAsync<OperationCanceledException>(() => reader.GetFieldValueAsync<string>("col", token));
+        _ = await Assert.ThrowsExactlyAsync<OperationCanceledException>(() =>
+            reader.GetFieldValueAsync<string>("col", token)
+        );
     }
 
     [Test]
@@ -621,7 +623,7 @@ public class DbDataReaderExtensionsTests
         var reader = Mock.Of<DbDataReader>().Object;
         var token = new CancellationToken(true);
 
-        _ = await Assert.ThrowsAsync<OperationCanceledException>(() =>
+        _ = await Assert.ThrowsExactlyAsync<OperationCanceledException>(() =>
             reader.GetFieldValueOrDefaultAsync<string>(0, cancellationToken: token)
         );
     }
@@ -632,7 +634,7 @@ public class DbDataReaderExtensionsTests
         var reader = Mock.Of<DbDataReader>().Object;
         var token = new CancellationToken(true);
 
-        _ = await Assert.ThrowsAsync<OperationCanceledException>(() =>
+        _ = await Assert.ThrowsExactlyAsync<OperationCanceledException>(() =>
             reader.GetFieldValueOrDefaultAsync<string>("col", cancellationToken: token)
         );
     }
