@@ -606,6 +606,57 @@ public class DbDataReaderExtensionsTests
         _ = await Assert.That(result).IsEqualTo(expected);
     }
 
+    [Test]
+    public async Task GetFieldValueAsync_String_WhenCancelled_ThrowsOperationCanceledException(
+        CancellationToken cancellationToken
+    )
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var reader = Mock.Of<DbDataReader>().Object;
+        using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        cts.Cancel();
+        var token = cts.Token;
+
+        _ = await Assert.ThrowsExactlyAsync<OperationCanceledException>(() =>
+            reader.GetFieldValueAsync<string>("col", token)
+        );
+    }
+
+    [Test]
+    public async Task GetFieldValueOrDefaultAsync_Int_WhenCancelled_ThrowsOperationCanceledException(
+        CancellationToken cancellationToken
+    )
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var reader = Mock.Of<DbDataReader>().Object;
+        using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        cts.Cancel();
+        var token = cts.Token;
+
+        _ = await Assert.ThrowsExactlyAsync<OperationCanceledException>(() =>
+            reader.GetFieldValueOrDefaultAsync<string>(0, cancellationToken: token)
+        );
+    }
+
+    [Test]
+    public async Task GetFieldValueOrDefaultAsync_String_WhenCancelled_ThrowsOperationCanceledException(
+        CancellationToken cancellationToken
+    )
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var reader = Mock.Of<DbDataReader>().Object;
+        using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        cts.Cancel();
+        var token = cts.Token;
+
+        _ = await Assert.ThrowsExactlyAsync<OperationCanceledException>(() =>
+            reader.GetFieldValueOrDefaultAsync<string>("col", cancellationToken: token)
+        );
+    }
+
     public static IEnumerable<(object?, string, bool, object?)> GetFieldValueOrDefaultAsyncStringData =>
         [
             (null, "stringColumn", true, "test"),
