@@ -607,10 +607,16 @@ public class DbDataReaderExtensionsTests
     }
 
     [Test]
-    public async Task GetFieldValueAsync_String_WhenCancelled_ThrowsOperationCanceledException()
+    public async Task GetFieldValueAsync_String_WhenCancelled_ThrowsOperationCanceledException(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var reader = Mock.Of<DbDataReader>().Object;
-        var token = new CancellationToken(true);
+        using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        cts.Cancel();
+        var token = cts.Token;
 
         _ = await Assert.ThrowsExactlyAsync<OperationCanceledException>(() =>
             reader.GetFieldValueAsync<string>("col", token)
@@ -618,10 +624,16 @@ public class DbDataReaderExtensionsTests
     }
 
     [Test]
-    public async Task GetFieldValueOrDefaultAsync_Int_WhenCancelled_ThrowsOperationCanceledException()
+    public async Task GetFieldValueOrDefaultAsync_Int_WhenCancelled_ThrowsOperationCanceledException(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var reader = Mock.Of<DbDataReader>().Object;
-        var token = new CancellationToken(true);
+        using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        cts.Cancel();
+        var token = cts.Token;
 
         _ = await Assert.ThrowsExactlyAsync<OperationCanceledException>(() =>
             reader.GetFieldValueOrDefaultAsync<string>(0, cancellationToken: token)
@@ -629,10 +641,16 @@ public class DbDataReaderExtensionsTests
     }
 
     [Test]
-    public async Task GetFieldValueOrDefaultAsync_String_WhenCancelled_ThrowsOperationCanceledException()
+    public async Task GetFieldValueOrDefaultAsync_String_WhenCancelled_ThrowsOperationCanceledException(
+        CancellationToken cancellationToken
+    )
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var reader = Mock.Of<DbDataReader>().Object;
-        var token = new CancellationToken(true);
+        using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        cts.Cancel();
+        var token = cts.Token;
 
         _ = await Assert.ThrowsExactlyAsync<OperationCanceledException>(() =>
             reader.GetFieldValueOrDefaultAsync<string>("col", cancellationToken: token)
