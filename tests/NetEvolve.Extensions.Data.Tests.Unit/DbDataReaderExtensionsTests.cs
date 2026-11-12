@@ -366,9 +366,8 @@ public class DbDataReaderExtensionsTests
         DbDataReader reader = null!;
         var index = 0;
 
-        _ = await Assert.ThrowsAsync<ArgumentNullException>(
-            "reader",
-            () => reader.GetFieldValueOrDefaultAsync<string>(index)
+        _ = await Assert.ThrowsAsync<ArgumentNullException>("reader", () =>
+            reader.GetFieldValueOrDefaultAsync<string>(index)
         );
     }
 
@@ -478,9 +477,8 @@ public class DbDataReaderExtensionsTests
         DbDataReader reader = null!;
         var name = "column";
 
-        _ = await Assert.ThrowsAsync<ArgumentNullException>(
-            "reader",
-            () => reader.GetFieldValueOrDefaultAsync<string>(name)
+        _ = await Assert.ThrowsAsync<ArgumentNullException>("reader", () =>
+            reader.GetFieldValueOrDefaultAsync<string>(name)
         );
     }
 
@@ -490,9 +488,8 @@ public class DbDataReaderExtensionsTests
         var reader = Mock.Of<DbDataReader>().Object;
         string name = null!;
 
-        _ = await Assert.ThrowsAsync<ArgumentNullException>(
-            "name",
-            () => reader.GetFieldValueOrDefaultAsync<string>(name)
+        _ = await Assert.ThrowsAsync<ArgumentNullException>("name", () =>
+            reader.GetFieldValueOrDefaultAsync<string>(name)
         );
     }
 
